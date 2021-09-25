@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\BillQuantity;
+use App\Helpers\Helper;
 
 
 use Illuminate\Support\Facades\Auth;
@@ -66,18 +67,40 @@ class BillQuantitiesController extends Controller
         $billquantity->project_id            = request('project_id');
 
         $billquantity->name                 = request('name');
+        $billquantity->brand                 = request('brand');
+
         $billquantity->modelNo              = request('modelNo');
         $billquantity->serial               = request('serial');
         $billquantity->type                 = request('type');
-        $billquantity->sale_value           = request('sale_value');
-        $billquantity->buy_value            = request('buy_value');
+        // $billquantity->sale_value           = request('sale_value');
+
+        $billquantity->sale_value           = Helper::ParseFloat($request->get('sale_value'));
+
+        // $billquantity->buy_value            = request('buy_value');
+        $billquantity->buy_value            = Helper::ParseFloat($request->get('buy_value'));
+
         $billquantity->net_profit           = request('net_profit');
         $billquantity->option               = request('option');
         $billquantity->remark               = request('remark');
+        $billquantity->filename               = request('filename');
 
 
-
+        $request->validate([
+            'file' => 'mimes:csv,txt,xlx,xls,pdf,|max:2048'
+            ]);
     
+            // $fileModel = new SubtaskFile;
+    
+            if($request->file()) {
+                $fileName = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                $filePath = $request->file('file')->storeAs('bom', $fileName, 'public');
+    
+                $billquantity->filename = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                // $billquantity->subtask_id = $request->input('subtasks_id');
+                $billquantity->name = $request->input('filename');
+                $billquantity->file_path = '/storage/' . $filePath;
+    
+            }
      
         // $billquantity = $request->handleImages($billquantity);
 
@@ -97,6 +120,7 @@ class BillQuantitiesController extends Controller
         // dd($request->all());
         return redirect()->back()->withInput()->withErrors($billquantity->getErrors());
     }
+
 
     /**
      * billquantity update.

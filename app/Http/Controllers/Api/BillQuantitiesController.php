@@ -30,9 +30,12 @@ class BillQuantitiesController extends Controller
             'buy_value',
             'type',
             'option',
-                    'serial',
-                    'modelNo',
-                    'net_profit',
+            'serial',
+            'modelNo',
+            'net_profit',
+            'brand',
+
+                    
             // 'image',
             
         ];
@@ -51,6 +54,8 @@ class BillQuantitiesController extends Controller
                     'created_at',
                     'updated_at',
                     'deleted_at',
+                    'brand',
+
 
                     // 'image',
                     )

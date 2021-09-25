@@ -1,166 +1,378 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\TaskFile;
-// use App\Models\Task;
+use App\Http\Controllers\TasksController;
+
+use App\Http\Requests\ImageUploadRequest;
+use App\Models\Task;
+use App\Models\Project;
+use App\Models\Statuslabel;
+use App\Models\Company;
+Use App\Models\User;
+Use App\Models\Subtask;
+Use App\Models\ImplementationPlan;
+Use App\Models\Team;
+Use App\Models\StatusTask;
+
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Collection;
 
+use App\Helpers\Helper;
+use App\Models\Actionlog;
+use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\CheckoutRequest;
+use App\Models\Location;
+use App\Models\Setting;
+use Carbon\Carbon;
+use DB;
+use Gate;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Input;
+use League\Csv\Reader;
+use League\Csv\Statement;
+use Paginator;
+use Redirect;
+use Response;
+use Slack;
+use Str;
+use TCPDF;
+use View;
 
 /**
- * This controller handles all actions related to assignwork for
+ * This controller handles all actions related to Tasks for
  * the Snipe-IT Asset Management application.
  *
  * @version    v1.0
  */
-class TasksUploadController extends Controller
+class TasksController extends Controller
 {
+
     /**
-     * Show a list of all Assignworks
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the tasks listing, which is generated in getDatatable.
      *
+     * @author  farez@mindwave.my
+     * @see TasksController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
-         // Grab all the Team
-         $this->authorize('view', TaskFile::class);
-         // Show the page
-         return view('tasksfile.index');
+        // Grab all the tasks
+        $this->authorize('view', Task::class);
+        // Show the page
+        return view('tasks/index');
     }
 
 
     /**
-     * Assignwork create.
+     * Returns a form view used to create a new Task.
      *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see TasksController::postCreate() method that validates and stores the data
+     * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
-    {
-        return view('tasksfile.edit')->with('item', new TaskFile);
+    public function create($id){
+
+    $this->authorize('create', Task::class);
+      
+    $implementationplans = ImplementationPlan::all();
+        
+    $projectid = Project::all()->where('id','=', $id);
+
+    $statustasks = StatusTask::all();
+
+    $users = User::all();
+
+    $implementation = DB::table('implementationplans')
+                    ->select('id','project_id','name')
+                    ->get();
+
+    $teams          = DB::table('teams')
+                    ->where('teams.project_id','=',$id)
+                    ->leftJoin('users', 'teams.user_id','=','users.id')
+                    ->get();
+                           
+    $assignworks    = DB::table('assignworks')
+                    ->where('assignworks.project_id','=',$projectid)
+                    ->leftJoin('contractors', 'assignworks.contractor_id','=','contractors.id')
+                    ->get();
+
+    $tasks          = DB::table('tasks')
+                    ->select('id','project_id','name')
+                    ->where('project_id', '=', $id)
+                    ->where('deleted_at', '=', NULL)
+                    ->get();
+
+        return view('tasks/edit',compact('implementationplans'),compact('teams'),compact('statustasks'),compact('tasks'))
+        // ->with('statuslabel_list', Helper::statusLabelList())
+        // ->with('statuslabel_types', Helper::statusTypeList())
+        ->with(compact('statustasks'))
+        ->with(compact('assignworks'))
+        ->with(compact('tasks'))
+        ->with(compact('projectid'))
+        ->with(compact('implementation'))
+        ->with(compact('users'))
+        ->with('item', new Task);
     }
 
 
     /**
-     * assignwork create form processing.
+     * Validates and stores a new Task.
      *
+     * @todo Check if a Form Request would work better here.
+     * @author farez@mindawave.my
+     * @see TasksController::getCreate() method that makes the form
+     * @since [v1.0]
      * @param ImageUploadRequest $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
-            ]);
-    
-            $fileModel = new TaskFile;
-    
-            if($request->file()) {
-                $fileName = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
-                $filePath = $request->file('file')->storeAs('task_files', $fileName, 'public');
-    
-                $fileModel->filename = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
-                $fileModel->task_id = $request->input('task_id');
-                $fileModel->notes = $request->input('notes');
-                $fileModel->name = $request->input('filename');
-                $fileModel->file_path = '/storage/' . $filePath;
-                $fileModel->save();
-    
-                // return redirect()->route('taskuploads.index')
-                // ->with('success','File has been uploaded.')
-                // ->with('file', $fileName);
+        $this->authorize('create', Task::class);
+        // new add by farez 27/5
+        // $project = new Project;
+        // $project = save();
 
-                $taskId = $fileModel->task_id;
-                return redirect()->route('tasksreroute',['taskid'=>$taskId])->with('success', trans('admin/files/message.create.success'));
-            }
+        $task = new Task();
+        $subtask = new Subtask();
+
+        $dropdown = $request->input('maintask');
+
+        if($dropdown == 0) {
+
+            $task = new Task();
+            $task->company_id                   = Company::getIdForCurrentUser($request->input('company_id'));
+            // $task->user_id                      = Auth::id();
+            $task->user_id                      = $request->input('team_member');
+            $task->milestone                    = $request->input('milestone', 0);
+            $task->team_member                  = $request->input('team_member');
+            $task->implementationplan_id        = $request->input('implementationplan_id');
+            $task->project_id                   = $request->input('project_id');
+            $task->type                         = $request->input('type');
+            $task->manager_id                   = $request->input('manager_id');
+            $task->statustask_id                = $request->input('statustask_id');
+            $task->contractor_id                = $request->input('contractor_id');        
+            $task->supplier_id                  = $request->input('supplier_id');        
+            $task->name                         = $request->input('name');
+            $task->details                      = $request->input('details');
+            $task->amount_task                  = $request->input('value_task');    
+            $task->payment_schedule_date        = $request->input('payment_month');        
+            $task->billingOrpayment             = $request->input('billingOrpayment');   
+            $task->contract_start_date          = $request->input('contract_start_date');
+            $task->contract_end_date            = $request->input('contract_end_date');
+            $task->actual_start_date            = $request->input('actual_start_date');
+            $task->actual_end_date              = $request->input('actual_end_date');
+            $task->contract_duration            = $request->input('contract_duration');
+            $task->actual_duration              = $request->input('actual_duration');
+            $task->priority                     = $request->input('priority');
+            $task->subtasks                     =$request ->input('subtasks');
+
+           
+            $task = $request->handleImages($task);
+
+            if($task->save()){
+
+            // $implementationplanId = $task->implementationplan_id;
+
+            $projectId = $task->project_id;
+            $project = Project::find($projectId);
+    
+            return redirect()->route('projectsreroute', ['projectid' => $projectId])->with('success',trans('admin/tasks/message.create.success'));
+        
+            
+            // return redirect()->route('impreroute', ['implementationplanid' => $implementationplanId])->with('success',trans('admin/tasks/message.create.success'));
+        }
+    }else{
+        
+        $subtask = new Subtask();
+        $subtask->company_id                = Company::getIdForCurrentUser($request->input('company_id'));
+        $subtask->user_id                   = Auth::id();
+        $subtask->project_id                = $request->input('project_id');
+        $subtask->statustask_id             = $request ->input('statustask_id');
+        $subtask->contractor_id             = $request->input('contractor_id');        
+        $subtask->supplier_id               = $request->input('supplier_id');        
+        $subtask->amount_task               = $request->input('value_task');    
+        $subtask->payment_schedule_date     = $request->input('payment_month');        
+        $subtask->billingOrpayment          = $request->input('billingOrpayment');   
+        $subtask->name                      = $request->input('name');
+        $subtask->details                   = $request->input('details');
+        $subtask->contract_start_date       = $request->input('contract_start_date');
+        $subtask->contract_end_date         = $request->input('contract_end_date');
+        $subtask->actual_start_date         = $request->input('actual_start_date');
+        $subtask->actual_end_date           = $request->input('actual_end_date');
+        $subtask->contract_duration         = $request->input('contract_duration');
+        $subtask->actual_duration           = $request->input('actual_duration');
+        $subtask->task_id                   = $request->input('maintask');
+        $subtask->implementationplan_id     = $request->input('implementationplan_id');
+        $subtask->priority                  = $request->input('priority');
+        $subtask->subtasks                    =$request ->input('subtasks');
+
+
+
+        $subtask = $request->handleImages($subtask);
+
+        if($subtask->save()){
+
+            // $implementationplanId = $subtask->implementationplan_id;
+            $projectId = $subtask->project_id;
+            $project = Project::find($projectId);
+
+            return redirect()->route('projectsreroute', ['projectid' => $projectId])->with('success',trans('admin/tasks/message.create.success'));
+        }
+        
+    }
+        return redirect()->back()->withInput()->withErrors($task->getErrors());
     }
 
+
     /**
-     * assignwork update.
+     * Makes a form view to edit Task information.
      *
-     * @param  int $assignworkId
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see TasksController::postCreate() method that validates and stores
+     * @param int $TaskId
+     * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($taskfileId = null)
+    public function edit($taskId = null)
     {
-        $this->authorize('update', TaskFile::class);
-        // Check if the team exists
-        if (is_null($item = TaskFile::find($taskfileId))) {
-            return redirect()->route('implementationplans.view')->with('error', trans('admin/teams/message.does_not_exist'));
+        $this->authorize('update', Task::class);
+        // Check if the task exists
+
+        $implementationplans = ImplementationPlan::all();
+        $statustasks = StatusTask::all();
+        $tasks = Task::all();
+
+        
+         $teams = Team::all();
+
+        if (is_null($item = Task::find($taskId))) {
+            return redirect()->route('tasks.index')->with('error', trans('admin/tasks/message.does_not_exist'));
         }
 
 
-        return view('tasksfile.edit', compact('item'));
+        return view('tasks/edit2', compact('item'),compact('implementationplans'),compact('teams'),compact('statustasks'),compact('tasks'))
+        ->with('statuslabel_list', Helper::statusLabelList())
+        ->with('statuslabel_types', Helper::statusTypeList());
     }
 
-  
     /**
-     * assignwork update form processing page.
+     * Validates and stores updated task data from edit form.
      *
-     * @param  int $assignrworkId
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see TasksController::getEdit() method that makes the form view
+     * @param ImageUploadRequest $request
+     * @param int $taskId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v1.0]
+     */
+    public function update(ImageUploadRequest $request, $taskId = null)
+    {
+        $this->authorize('update', Task::class);
+        // Check if the task exists
+        if (is_null($task = Task::find($taskId))) {
+            return redirect()->route('projects.index')->with('error', trans('admin/tasks/message.does_not_exist'));
+        }
+
+        // Update the task data
+        $task->manager_id           = $request->input('manager_id');
+        $task->status_id            = $request->input('status_id');
+        $task->contractor_id        = $request->input('contractor_id');        
+        $task->supplier_id          = $request->input('supplier_id');        
+        $task->name                 = $request->input('name');
+        $task->details              = $request->input('details');
+        $task->contract_start_date  = $request->input('contract_start_date');
+        $task->contract_end_date    = $request->input('contract_end_date');
+        $task->actual_start_date    = $request->input('actual_start_date');
+        $task->actual_end_date      = $request->input('actual_end_date');
+        $task->contract_duration    = $request->input('contract_duration');
+        $task->actual_duration      = $request->input('actual_duration');
+        $task->statustask_id        = $request->input('statustask_id');
+        $task->priority             = $request->input('priority');
+        $task                       = $request->handleImages($task);
+
+        if ($task->save()) {
+
+            $projectId = $task->project_id;
+            $project = Project::find($projectId);
+
+            // return redirect()->route("projects.index")->with('success', trans('admin/tasks/message.update.success'));
+            return redirect()->route('projectsreroute', ['projectid' => $projectId])->with('success', trans('admin/tasks/message.update.success'));
+
+            // return view('tasks/view', compact('task'));
+
+        }
+        return redirect()->back()->withInput()->withInput()->withErrors($task->getErrors());
+    }
+
+    /**
+     * Validates and deletes selected task.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $task
+     * @since [v1.0]
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update($taskfileId = null, ImageUploadRequest $request)
+    public function destroy($taskId)
     {
-        $this->authorize('update', TaskFile::class);
-        // Check if the file exists
-        if (is_null($taskfile = TaskFile::find($taskfileId))) {
-            return redirect()->route('taskuploads.index')->with('error', trans('admin/teams/message.does_not_exist'));
+        $this->authorize('delete', Task::class);
+        if (is_null($task = Task::find($taskId))) {
+            return redirect()->route('projects.index')->with('error', trans('admin/tasks/message.not_found'));
         }
 
-        // Update the team data
-        // $file->user_id      = $request->input('user_id');
-  
-        if ($file->save()) {
-            return redirect()->route("projects.index")->with('success', trans('admin/teams/message.update.success'));
-        }
-        return redirect()->back()->withInput()->withInput()->withErrors($team->getErrors());
+
+        // if ($client->assets_count > 0) {
+        //     return redirect()->route('clients.index')->with('error', trans('admin/clients/message.delete.assoc_assets', ['asset_count' => (int) $client->assets_count]));
+        // }
+
+        // if ($client->asset_maintenances_count > 0) {
+        //     return redirect()->route('clients.index')->with('error', trans('admin/clients/message.delete.assoc_maintenances', ['asset_maintenances_count' => $client->asset_maintenances_count]));
+        // }
+
+        // if ($client->licenses_count > 0) {
+        //     return redirect()->route('clients.index')->with('error', trans('admin/clients/message.delete.assoc_licenses', ['licenses_count' => (int) $client->licenses_count]));
+        // }
+
+        $task->delete();
+        $projectId = $task->project_id;
+        $project = Project::find($projectId);
+        // $implementationplanId = $task->implementationplan_id;
+
+        return redirect()->route('projectsreroute', ['projectid' => $projectId])->with('success',trans('admin/tasks/message.delete.success'));
+
     }
 
     /**
-     * Delete the given assignwork.
-     *
-     * @param  int $assignworkId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function destroy($taskfileId)
-    {
-        $this->authorize('delete', TaskFile::class);
-        if (is_null($taskfile = TaskFile::find($taskfileId))) {
-            return redirect()->route('projects.index')->with('error', trans('admin/clients/message.not_found'));
-        }
-
-        $team->delete();
-        return redirect()->route('projects.index')->with('success',
-            trans('admin/clients/message.delete.success')
-        );
-
-
-    }
-
-
-    /**
-     *  Get the asset information to present to the assignwork view page
-     *
-     * @param null $assignworkId
-     * @return \Illuminate\Contracts\View\View
-     * @internal param int $assetId
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the tasks detail page.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param int $id
+    * @since [v1.0]
+    * @return \Illuminate\Contracts\View\View
      */
     public function show($id = null)
     {
-        $taskfile = TaskFile::find($id);
+        $task = Task::find($id);
 
-        if (isset($taskfile->id)) {
-            return view('tasksfile.view', compact('file'));
+        if (isset($task->id)) {
+            return view('tasks/view', compact('task'));
         }
 
-        return redirect()->route('taskuploads.index')->with('error', trans('admin/teams/message.does_not_exist'));
+        return redirect()->route('tasks.index')->with('error', trans('admin/tasks/message.does_not_exist'));
     }
-    
+
 }

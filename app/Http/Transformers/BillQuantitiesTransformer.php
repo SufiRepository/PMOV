@@ -31,7 +31,8 @@ class BillQuantitiesTransformer
                 'modelNo'         => e($billquantity->modelNo),
                 'type'           => e($billquantity->type),
                 'option'           => e($billquantity->option),
-                'remark'           => e($billquantity->reamrk),
+                'remark'           => e($billquantity->remark),
+                'brand'            => e($billquantity->brand),
 
 
                 'sale_value'     => e($billquantity->sale_value),
@@ -49,6 +50,8 @@ class BillQuantitiesTransformer
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', BillQuantity::class),
                 'delete' => (Gate::allows('delete', BillQuantity::class)),
+                'view'   => Gate::allows('view',   BillQuantity::class),
+
             ];
 
             $array += $permissions_array;

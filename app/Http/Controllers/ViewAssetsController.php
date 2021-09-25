@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Contractor;
+use App\Models\Supplier;
+
 use App\Models\Project;
+use App\Models\Task;
 
 /**
  * This controller handles all actions related to the ability for users
@@ -37,10 +40,15 @@ class ViewAssetsController extends Controller
         $clientcount = new Client;
         $contractorcount = new Contractor;
         $countproject = new Project;
+        $suppliercount = new Supplier;
+        $taskcount = new Task;
+        $usercount =  new User;
+
 
         $counts['client'] =  $clientcount -> count_by_company();
         $counts['contractor']  =  $contractorcount -> count_by_company();
-
+        $counts['task']         =  $taskcount            ->count_by_user();
+        $counts['user']         =  $usercount            ->count_by_company();
         $counts['project']  =  $countproject -> count_by_user();
 
 
@@ -49,6 +57,8 @@ class ViewAssetsController extends Controller
         $counts['accessory'] = \App\Models\Accessory::count();
         $counts['license'] = \App\Models\License::assetcount();
         $counts['consumable'] = \App\Models\Consumable::count();
+        $counts['supplier']     =  $suppliercount        ->count_by_company();
+
         // $counts['project'] = \App\Models\Project::count();
         // $counts['client'] = \App\Models\Client::count();
         // $counts['contractor'] = \App\Models\Contractor::count();

@@ -70,11 +70,16 @@ class TasksTransformer
             
             'update' => Gate::allows('update', Task::class),
             'delete' => Gate::allows('delete', Task::class),
-            'clone' => Gate::allows('clone', Task::class),
+            'view'   => Gate::allows('view',   Task::class),
+
 
         ];
         $array += $permissions_array;
         return $array;
+    }
+
+    public function transformTasksDatatable($tasks) {
+        return (new DatatablesTransformer)->transformDatatables($tasks);
     }
 
 

@@ -54,6 +54,8 @@ class SubtasksTransformer
             
             'update' => Gate::allows('update', Subtask::class),
             'delete' => Gate::allows('delete', Subtask::class),
+            'view'   => Gate::allows('view',   Subtask::class),
+
         ];
         $array += $permissions_array;
         return $array;

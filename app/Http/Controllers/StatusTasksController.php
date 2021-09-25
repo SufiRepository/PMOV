@@ -1,177 +1,267 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Task;
 use App\Models\StatusTask;
 
+use App\Models\Subtask;
 use App\Models\Company;
+Use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 /**
- * This controller handles all actions related to statustasks for
+ * This controller handles all actions related to Subtasks for
  * the Snipe-IT Asset Management application.
  *
  * @version    v1.0
  */
-class StatusTasksController extends Controller
+class SubtasksController extends Controller
 {
+
     /**
-     * Show a list of all statustasks
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the subtasks listing, which is generated in getDatatable.
      *
+     * @author  farez@mindwave.my
+     * @see SubtaskController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
-        // Grab all the statustasks
-        $this->authorize('view', StatusTask::class);
-
+        // Grab all the subtasks
+        $this->authorize('view', Subtask::class);
         // Show the page
-        return view('statustasks/index');
+        return view('subtasks/index');
     }
 
 
     /**
-     * StatusTask create.
+     * Returns a form view used to create a new Subtask.
      *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see SubtasksController::postCreate() method that validates and stores the data
+     * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
+    public function create($id)
     {
-        $this->authorize('create', StatusTask::class);
+        // $this->authorize('create', Subtask::class);
+        // return view('subtasks/edit') ->with('item', new Subtask);
 
-        return view('statustasks/edit')
-        ->with('item', new StatusTask);
+        $this->authorize('create', Subtask::class);
+
+        $tasks = Task::all()->where('id','=', $id);
+        $statustasks = StatusTask::all();
+
+        return view('subtasks/edit',compact('tasks'),compact('statustasks'))
+        // ->with('statuslabel_list', Helper::statusLabelList())
+        // ->with('statuslabel_types', Helper::statusTypeList())
+        ->with('item', new Subtask() );
+
     }
 
 
     /**
-     * StatusTask create form processing.
+     * Validates and stores a new Subtask.
      *
+     * @todo Check if a Form Request would work better here.
+     * @author farez@mindawave.my
+     * @see SubtasksController::getCreate() method that makes the form
+     * @since [v1.0]
      * @param ImageUploadRequest $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
     {
-        $this->authorize('create', StatusTask::class);
-        // Create a new statustask
-        $statustask = new StatusTask;
-        // Save the location data
-        $statustask->company_id       = Company::getIdForCurrentUser($request->input('company_id'));
-        $statustask->name                 = request('name');
-    
-        $statustask->user_id              = Auth::id();
+        $this->authorize('create', Subtask::class);
+        // new add by farez 27/5
+        // $project = new Project;
+        // $project = save();
 
+        $subtask = new Subtask();
 
-        if ($statustask->save()) {
-            return redirect()->route('statustasks.index')->with('success', trans('admin/statustask/message.create.success'));
+        $subtask->company_id                = Company::getIdForCurrentUser($request->input('company_id'));
+        $subtask->user_id                   = Auth::id();
+        $subtask->task_id                   = $request->input('task_id');
+        $subtask->project_id                = $request->input('project_id');
+        $subtask->statustask_id             = $request ->input('statustask_id');
+        $subtask->contractor_id             = $request->input('contractor_id');        
+        $subtask->supplier_id               = $request->input('supplier_id');        
+        $subtask->amount_task               = $request->input('value_task');    
+        $subtask->payment_schedule_date     = $request->input('payment_month');        
+        $subtask->billingOrpayment          = $request->input('billingOrpayment');   
+        $subtask->name                      = $request->input('name');
+        $subtask->details                   = $request->input('details');
+        $subtask->contract_start_date       = $request->input('contract_start_date');
+        $subtask->contract_end_date         = $request->input('contract_end_date');
+        $subtask->actual_start_date         = $request->input('actual_start_date');
+        $subtask->actual_end_date           = $request->input('actual_end_date');
+        $subtask->contract_duration         = $request->input('contract_duration');
+        $subtask->actual_duration           = $request->input('actual_duration');
+        $subtask->priority                  = $request->input('priority');
+
+        $subtask = $request->handleImages($subtask);
+
+        if ($subtask->save()) {
+            // return redirect()->route("projects.index")->with('success', trans('admin/subtasks/message.create.success'));
+            // return view('subtasks/view', compact('subtask'));
+            $taskId = $subtask->task_id;
+
+            $task = Task::find($taskId);
+            // $task->subtasks =$subtask->id;
+            $task->subtasks                    =$request ->input('subtasks')+1;
+
+            $task->save();
+          
+
+            return redirect()->route('tasksreroute',['taskid'=>$taskId])->with('success', trans('admin/billings/message.create.success'));
         }
-        return redirect()->back()->withInput()->withErrors($statustask->getErrors());
+                // dd($request->all());
+
+        return redirect()->back()->withInput()->withErrors($subtask->getErrors());
     }
 
+
     /**
-     * statustask update.
+     * Makes a form view to edit subtask information.
      *
-     * @param  int $statustaskId
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see SubtasksController::postCreate() method that validates and stores
+     * @param int $subtaskId
+     * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($statustaskId = null)
+    public function edit($subtaskId = null)
     {
-        $this->authorize('update', StatusTask::class);
-        // Check if the statustask exists
-        if (is_null($item = StatusTask::find($statustaskId))) {
-            // Redirect to the statustask  page
-            return redirect()->route('statustasks.index')->with('error', trans('admin/statustask/message.does_not_exist'));
-        }
+        $this->authorize('update', Subtask::class);
+        // Check if the subtask exists
 
-        // Show the page
-        return view('statustasks/edit', compact('item'));
+
+        if (is_null($item = Subtask::find($subtaskId))) {
+            // return redirect()->route('subtasks.index')->with('error', trans('admin/subtasks/message.does_not_exist'));
+            return view('subtasks/view', compact('subtask'));
+        }
+        return view('subtasks/edit2', compact('item'))
+        ->with('statuslabel_list', Helper::statusLabelList())
+        ->with('statuslabel_types', Helper::statusTypeList());
     }
 
 
     /**
-     * statustask update form processing page.
+     * Validates and stores updated subtask data from edit form.
      *
-     * @param  int $statustaskId
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see SubtasksController::getEdit() method that makes the form view
+     * @param ImageUploadRequest $request
+     * @param int $subtaskId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v1.0]
+     */
+    public function update(ImageUploadRequest $request, $subtaskId = null)
+    {
+        $this->authorize('update', Subtask::class);
+        // Check if the subtask exists
+        if (is_null($subtask = Subtask::find($subtaskId))) {
+            return redirect()->route('projects.index')->with('error', trans('admin/subtasks/message.does_not_exist'));
+        }
+
+        // Update the subtask data
+        $subtask->name                      = $request->input('name');
+        $subtask->details                   = $request->input('details');
+        $subtask->status_id                 = $request ->input('status_id');
+        $subtask->contractor_id             = $request->input('contractor_id');    
+        $subtask->supplier_id               = $request->input('supplier_id');        
+        $subtask->contract_start_date       = $request->input('contract_start_date');
+        $subtask->contract_end_date         = $request->input('contract_end_date');
+        $subtask->actual_start_date         = $request->input('actual_start_date');
+        $subtask->actual_end_date           = $request->input('actual_end_date');
+        $subtask->contract_duration         = $request->input('contract_duration');
+        $subtask->actual_duration           = $request->input('actual_duration');
+        $subtask->priority                  = $request->input('priority');
+
+        $subtask = $request->handleImages($subtask);
+
+
+        if ($subtask->save()) {
+            
+            // return redirect()->route("projects.index")->with('success', trans('admin/subtasks/message.update.success'));
+            // return view('subtasks/view', compact('subtask'));
+            return redirect()->route('subtasks.show', ['subtask' => $subtaskId])->with('success', trans('admin/subtasks/message.update.success'));
+
+        }
+        return redirect()->back()->withInput()->withInput()->withErrors($subtask->getErrors());
+    }
+
+    /**
+     * Validates and deletes selected subtask.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $subtaskId
+     * @since [v1.0]
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update($statustaskId, ImageUploadRequest $request)
+    public function destroy($subtaskId)
     {
-        $this->authorize('update', StatusTask::class);
-        // Check if the statustask exists
-        if (is_null($statustask = StatusTask::find($statustaskId))) {
-            // Redirect to the statustask  page
-            return redirect()->route('statustasks.index')->with('error', trans('admin/statustasks/message.does_not_exist'));
+        $this->authorize('delete', Subtask::class);
+        if (is_null($subtask = Subtask::find($subtaskId))) {
+            return redirect()->route('projects.index')->with('error', trans('admin/subtasks/message.not_found'));
         }
 
-        // Save the  data
-        $statustask->company_id           = Company::getIdForCurrentUser($request->input('company_id'));
-        $statustask->name                 = request('name');
-     
-        if ($statustask->save()) {
-            return redirect()->route('statustasks.index')->with('success', trans('admin/statustasks/message.update.success'));
-        }
 
-        return redirect()->back()->withInput()->withErrors($statustask->getErrors());
+        // if ($client->assets_count > 0) {
+        //     return redirect()->route('clients.index')->with('error', trans('admin/clients/message.delete.assoc_assets', ['asset_count' => (int) $client->assets_count]));
+        // }
+
+        // if ($client->asset_maintenances_count > 0) {
+        //     return redirect()->route('clients.index')->with('error', trans('admin/clients/message.delete.assoc_maintenances', ['asset_maintenances_count' => $client->asset_maintenances_count]));
+        // }
+
+        // if ($client->licenses_count > 0) {
+        //     return redirect()->route('clients.index')->with('error', trans('admin/clients/message.delete.assoc_licenses', ['licenses_count' => (int) $client->licenses_count]));
+        // }
+
+        $subtask->delete();
+
+        $taskId = $subtask->task_id;
+         
+
+        return redirect()->route('tasksreroute',['taskid'=>$taskId])->with('success', trans('admin/subtasks/message.create.success'));
+        // return redirect()->route('projects.index')->with('success',
+        //     trans('admin/clients/message.delete.success')
+        // );
+
 
     }
 
     /**
-     * Delete the given statustask.
-     *
-     * @param  int $statustaskId
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the subtasks detail page.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param int $id
+    * @since [v1.0]
+    * @return \Illuminate\Contracts\View\View
      */
-    public function destroy($statustaskId)
+    public function show($id = null)
     {
-        $this->authorize('delete', StatusTask::class);
-        if (is_null($statustask = StatusTask::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count','assets as assets_count','licenses as licenses_count')->find($statustask))) {
-            return redirect()->route('statustasks.index')->with('error', trans('admin/statustasks/message.not_found'));
+        $subtask = Subtask::find($id);
+
+        if (isset($subtask->id)) {
+            return view('subtasks/view', compact('subtask'));
         }
 
-
-        if ($statustask->assets_count > 0) {
-            return redirect()->route('statustasks.index')->with('error', trans('admin/statustasks/message.delete.assoc_assets', ['asset_count' => (int) $statustask->assets_count]));
-        }
-
-        if ($statustask->asset_maintenances_count > 0) {
-            return redirect()->route('statustasks.index')->with('error', trans('admin/statustasks/message.delete.assoc_maintenances', ['asset_maintenances_count' => $statustask->asset_maintenances_count]));
-        }
-
-        if ($statustask->licenses_count > 0) {
-            return redirect()->route('statustasks.index')->with('error', trans('admin/statustasks/message.delete.assoc_licenses', ['licenses_count' => (int) $statustask->licenses_count]));
-        }
-
-        $statustask->delete();
-        return redirect()->route('statustasks.index')->with('success',
-            trans('admin/statustasks/message.delete.success')
-        );
-
-
-    }
-
-
-    /**
-     *  Get the asset information to present to the StatusTask view page
-     *
-     * @param null $statustaskId
-     * @return \Illuminate\Contracts\View\View
-     * @internal param int $assetId
-     */
-    public function show($statustaskId = null)
-    {
-        $statustask = StatusTask::find($statustaskId);
-
-        if (isset($statustask->id)) {
-                return view('statustasks/view', compact('statustask'));
-        }
-
-        return redirect()->route('statustasks.index')->with('error', trans('admin/statustasks/message.does_not_exist'));
+        return redirect()->route('subtasks.index')->with('error', trans('admin/subtasks/message.does_not_exist'));
     }
 
 }

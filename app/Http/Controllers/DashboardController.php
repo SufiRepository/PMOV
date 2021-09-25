@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Client;
 use App\Models\Contractor;
 use App\Models\Supplier;
+use App\Models\Project;
 
 
 
@@ -67,19 +68,22 @@ class DashboardController extends Controller
             $taskcount = new Task;
             $usercount =  new User;
             $suppliercount = new Supplier;
+            $projectcount = new Project;
   
             $counts['client']       =  $clientcount          ->count_by_company();
             $counts['contractor']   =  $contractorcount      ->count_by_company();
-            $counts['task']         =  $taskcount            ->count_by_company();
+            $counts['task']         =  $taskcount            ->count_by_user();
             $counts['user']         =  $usercount            ->count_by_company();
             $counts['supplier']     =  $suppliercount        ->count_by_company();
+            $counts['project']     =  $projectcount        ->count_by_user();
+
 
             //$counts['asset'] = \App\Models\Asset::count();
             $counts['asset'] = $assetcount->count_by_company();
             $counts['accessory'] = \App\Models\Accessory::count();
             $counts['license'] = \App\Models\License::assetcount();
             $counts['consumable'] = \App\Models\Consumable::count();
-            $counts['project'] = \App\Models\Project::count();
+            // $counts['project'] = \App\Models\Project::count()->where('user_id','=',Auth::id());
             // $counts['supplier'] = \App\Models\Supplier::count();
 
             // $counts['client'] = \App\Models\Client::count();
