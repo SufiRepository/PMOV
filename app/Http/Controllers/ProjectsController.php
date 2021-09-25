@@ -10,6 +10,7 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Client;
 use App\Models\User;
+use DB;
 
 use App\Models\Typeproject;
 use App\Models\Contractor;
@@ -149,7 +150,7 @@ class ProjectsController extends Controller
 
         $project->name                  = $request->input('name');
         $project->projectnumber         = $request->input('projectnumber');
-        $project->value                 = $request->input('value');
+        $project->value                 = Helper::ParseFloat($request->get('value'));
         $project->details               = $request->input('details');
         $project->duration              = $request->input('duration');
         $project->start_date            = $request->input('start_date');
@@ -180,6 +181,27 @@ class ProjectsController extends Controller
             $user = new User;
             
     
+            $taskpriority = DB::table('tasks')->where('project_id',$project->id )
+            ->where('priority','=','High') 
+            ->where('deleted_at','=',null) 
+            ->count();
+
+            $taskcompleted = DB::table('tasks')->where('project_id',$project->id )
+            ->where('statustask_id','=','Completed') 
+            ->where('deleted_at','=',null) 
+            ->count();
+    
+            $taskdelayed = DB::table('tasks')->where('project_id',$project->id )
+            ->where('statustask_id','=','Delayed') 
+            ->where('deleted_at','=',null) 
+            ->count();
+
+            $tasktotal = DB::table('tasks')->where('project_id',$project->id )
+            // ->where('statustask_id','=','Delayed') 
+            ->where('deleted_at','=',null) 
+            ->count();
+
+
                 //$counts['asset'] = \App\Models\Asset::count();
                 // $counts['license'] = \App\Models\License::assetcount();
     
@@ -197,7 +219,13 @@ class ProjectsController extends Controller
 
                 // MailsController::getProject($project->name,$project->start_date, $project->end_date,$project->duration ,$project->value, $project->projectnumber  );
                 
-              return view('projects/view', compact('project'))->with(['counts'=> $counts, 'role_id' => $role_id]) ;
+              return view('projects/view', compact('project'))
+                    ->with(compact('taskpriority'))
+                    ->with(compact('taskcompleted'))
+                    ->with(compact('taskdelayed'))
+                    ->with(compact('tasktotal'))
+
+              ->with(['counts'=> $counts, 'role_id' => $role_id]) ;
             
             // return redirect()->route("projects.index")->with('success', trans('admin/projects/message.create.success'));
         }
@@ -257,7 +285,7 @@ class ProjectsController extends Controller
         $project->projectnumber         = $request->input('projectnumber');
         $project->duration              = $request->input('duration');
         $project->details               = $request->input('details');
-        $project->value                 = $request->input('value');
+        $project->value                 =  Helper::ParseFloat($request->get('value'));
         $project->start_date            = $request->input('start_date');
         $project->finish_date           = $request->input('finish_date');
         $project->location_id           = $request->input('location_id');
@@ -277,28 +305,18 @@ class ProjectsController extends Controller
                 //$counts['asset'] = \App\Models\Asset::count();
                 // $counts['license'] = \App\Models\License::assetcount();
     
-                $counts['license']       = $licensecount    ->count_by_project();
-                $counts['asset']         = $assetcount      ->count_by_company();
-                $counts['accessory']     = \App\Models\Accessory::count();
-                $counts['consumable']    = \App\Models\Consumable::count();
-                $counts['project']       = \App\Models\Project::count();
-        
-                $counts['task']       = $taskcount->count_by_priority();
-    
-                $counts['team']       = \App\Models\Team::count();
-                // $counts['task']       = \App\Models\Task::count();
-                $counts['assignwork']       = \App\Models\Assignwork::count();
-
-                $counts['task']       = $taskcount->count_by_priority();
-                $counts['taskcompleted']       = $taskcount->count_by_completed();
-                $counts['delayed']     = $taskcount-> count_by_delayed();
-                $counts['total_task']     = $taskcount-> count_by_total();
+                // $counts['task']                = $taskcount->count_by_priority();
+                $counts['taskcompleted']        = $taskcount->count_by_completed();
+                // $counts['delayed']             = $taskcount-> count_by_delayed();
+                // $counts['total_task']          = $taskcount-> count_by_total();
         
 
-                $counts['grand_total']   =  $counts['asset'] +  $counts['accessory'] +  $counts['license'] +  $counts['consumable'];
+                // $counts['grand_total']   =  $counts['asset'] +  $counts['accessory'] +  $counts['license'] +  $counts['consumable'];
 
-            //   return view('projects/view', compact('project'))->with('counts', $counts) ;
-            return redirect()->route('projects.show', ['project' => $projectId])->with('success', trans('admin/projects/message.update.success'));
+            //   return view('projects/view', compact('project')) ;
+            return redirect()->route('projects.show', ['project' => $projectId])
+            ->with('counts', $counts)
+            ->with('success', trans('admin/projects/message.update.success'));
             // return redirect()->route('projects.index', ['project' => $projectId])->with('success', trans('admin/projects/message.update.success'));
         }
         // If we can't adjust the number of seats, the error is flashed to the session by the event handler in License.php
@@ -363,35 +381,54 @@ class ProjectsController extends Controller
         $taskcount = new Task;
         $asset_stats=null;
 
-            //$counts['asset'] = \App\Models\Asset::count();
-            // $counts['license'] = \App\Models\License::assetcount();
-
-            $counts['license']       = $licensecount    ->count_by_project();
-            $counts['asset']         = $assetcount      ->count_by_company();
-            $counts['accessory']     = \App\Models\Accessory::count();
-            $counts['consumable']    = \App\Models\Consumable::count();
-            $counts['project']       = \App\Models\Project::count();
     
-            $counts['task']       = $taskcount->count_by_priority();
-            $counts['taskcompleted']       = $taskcount->count_by_completed();
-            $counts['delayed']     = $taskcount-> count_by_delayed();
-            $counts['total_task']     = $taskcount-> count_by_total();
+            // $counts['task']                = $taskcount->count_by_priority();
+            // $counts['taskcompleted']       = $taskcount->count_by_completed();
+            // $counts['delayed']             = $taskcount-> count_by_delayed();
+            // $counts['total_task']          = $taskcount-> count_by_total();
 
-            $counts['team']       = \App\Models\Team::count();
-            // $counts['task']       = \App\Models\Task::count();
-            $counts['assignwork']       = \App\Models\Assignwork::count();
+            $taskpriority = DB::table('tasks')->where('project_id',$projectId)
+            ->where('priority','=','High') 
+            ->where('deleted_at','=',null) 
+            ->count();
 
-            $counts['grand_total']   =  $counts['asset'] +  $counts['accessory'] +  $counts['license'] +  $counts['consumable'];
-            // $counts['total_task']   =  $counts['task'] ;
+            $taskcompleted = DB::table('tasks')->where('project_id',$projectId)
+            ->where('statustask_id','=','Completed') 
+            ->where('deleted_at','=',null) 
+            ->count();
+    
+            $taskdelayed = DB::table('tasks')->where('project_id',$projectId)
+            ->where('statustask_id','=','Delayed') 
+            ->where('deleted_at','=',null) 
+            ->count();
 
+            $tasktotal = DB::table('tasks')->where('project_id',$projectId)
+            // ->where('statustask_id','=','Delayed') 
+            ->where('deleted_at','=',null) 
+            ->count();
 
+            // $issuetotal = DB::table('helpdesks')->where('project_id',$projectId)
+            // // ->where('statustask_id','=','Delayed') 
+            // ->where('deleted_at','=',null) 
+            // ->count();
 
             // return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
 
 
         if (isset($project->id)) {
 
-            return view('projects/view', compact('project'))->with(['counts' => $counts, 'role_id' => $role_id->role_id]);
+            return view('projects/view', compact('project'))
+            ->with(compact('taskpriority'))
+            ->with(compact('taskcompleted'))
+            ->with(compact('taskdelayed'))
+            ->with(compact('tasktotal'))
+            // ->with(compact('$issuetotal'))
+
+
+
+            ->with(['role_id' => $role_id->role_id]);
+            // ->with(['counts' => $counts, 'role_id' => $role_id->role_id]);
+
         }
         return view('projects/view', compact('project'));
         // ->with(['counts' => $counts, 'role_id' => $role_id->role_id]);
