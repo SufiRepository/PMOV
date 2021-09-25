@@ -1,0 +1,88 @@
+.couscous
+.DS_Store
+.env
+.idea
+/bin/
+/bootstrap/compiled.php
+/node_modules
+/vendor
+app/database/*.sqlite
+app/storage/meta/services.json
+composer.phar
+crowdin.yaml
+Homestead.json
+Homestead.yaml
+output
+phpDocumentor.phar
+public/uploads/*.gif
+public/uploads/barcodes/*.png
+public/uploads/*.jpg
+public/uploads/*.png
+public/uploads/*.svg
+public/uploads/*.tif
+public/uploads/uploads/*
+public/uploads/projects/*
+public/uploads/assets/*
+public/uploads/billings/*
+public/uploads/avatars/*
+public/uploads/logo.gif
+public/uploads/logo.png
+public/uploads/logo.svg
+public/uploads/models/*
+public/uploads/suppliers/*
+public/uploads/accessories/*
+public/uploads/locations/*
+public/uploads/manufacturers/*
+public/uploads/components/*
+public/uploads/consumables/*
+public/uploads/companies/*
+public/uploads/categories/*
+public/uploads/users/*
+public/uploads/implementation_files/*
+public/uploads/project_files/*
+public/uploads/subtask_files/*
+public/uploads/task_files/*
+public/uploads/paymentschedules/*
+public/uploads/paymenttasks/*
+public/uploads/paymentsubtask/*
+storage/app/private_uploads/users/*
+public/uploads/departments/*
+storage/debugbar/
+storage/dumps/*
+storage/laravel-backups
+storage/logs/*
+storage/private_uploads/users/*
+tests/_data/scenarios
+tests/_output/*
+tests/_support/_generated/*
+/npm-debug.log
+/storage/oauth-private.key
+/storage/oauth-public.key
+
+*.cache
+
+.vagrant
+
+\.php_cs\.dist
+
+phpmd\.xml
+/public/storage
+_ide_helper.php
+.phpstorm.meta.php
+_ide_helper_models.php
+/.phplint-cache
+public/uploads/implementation files/testing file.pdf
+public/uploads/project files/testing file 2.0.pdf
+public/uploads/project files/testing filee.pdf
+public/uploads/task files/testing matt file.pdf
+public/uploads/paymenttasks/testing fileeee.pdf
+public/uploads/paymenttasks/testing SD.pdf
+public/uploads/paymenttasks/testing PO.pdf
+public/uploads/paymenttasks/testing DO.pdf
+public/uploads/paymenttasks/supported documents.pdf
+public/uploads/paymenttasks/Purchase Order.pdf
+public/uploads/paymenttasks/'delivery order.pdf
+public/uploads/paymentsubtask/testing do.pdf
+public/uploads/paymentsubtask/testing file.pdf
+public/uploads/paymentsubtask/testing SD.pdf
+resources/views/teams/edit.blade.php
