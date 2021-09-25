@@ -1,0 +1,36 @@
+<?php
+
+return array(
+
+    'asset'             => 'Asset',
+    'checkin'           => 'Checkin',
+    'create'            => 'New Project',
+    'expiration'        => 'Expiration Date',
+    'license_key'       => 'Product Key',
+    'staff'             => 'Staff',
+    'details'           => 'Details',
+    'due_date'          => 'Due Date',
+    'end_date'          => 'End Date',
+    'start_date'        => 'Start Date',
+    'maintained'        => 'Maintained',
+    'name'              => 'Project Name',
+    'no_depreciation'   => 'Do Not Depreciate',
+    'purchase_order'    => 'Purchase Order Number',
+    'reassignable'      => 'Reassignable',
+    'remaining_seats'   => 'Remaining Seats',
+   
+    'seats'             => 'Seats',
+    'termination_date'  => 'Termination Date',
+    'to_email'          => 'Licensed to Email',
+    'to_name'           => 'Project Name',
+    'update'            => 'Update Project',
+    'tasks'             => 'Tasks',
+    'projectnumber'     => 'Contract No.',
+    'duration'          => 'Duration',
+    'finish_date'       => 'Finish Date',
+    'assignwork'        => 'Assign Project To Contractor',
+    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.',
+    'project'           =>   'Project',
+     'project_start_date' => 'Project Start Date',
+     'project_end_date' => 'Project End Date', 
+);

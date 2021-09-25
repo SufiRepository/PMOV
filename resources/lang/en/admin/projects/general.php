@@ -1,0 +1,48 @@
+<?php
+
+return array(
+    'about_project_title'          => 'About Project',
+    'about_project'                => 'A project (or program) is any undertaking, carried out individually or collaboratively and possibly ',
+    'checkin'  				           	     => 'Checkin Project Seat',
+    'checkout_history'  		             => 'Checkout History',
+    'checkout'  				             => 'Checkout Project Seat',
+    'edit'  					             => 'Edit Project',
+    'filetype_info'				             => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'clone'  					             => 'Clone Project',
+    'history_for'  				             => 'History for ',
+    'in_out'  					             => 'In/Out',
+    'info'  					             => 'Project Info',
+    'license_seats'  			             => 'Project Seats',
+    'seat'  					             => 'Seat',
+    'seats'  					             => 'Seats',
+    'projectlist'                            => 'Project List',
+    'software_licenses'  		             => 'Software Project',
+    'user'  					             => 'User',
+    'view'  					             => 'View Project',
+    'implemntationplan'                      => 'Implemntation Plan',
+    'team'                                   => 'Team',
+    'project_members'                        => 'Project Members',
+
+    'bq'                                     => "Bill Of Quantities",
+    'uploadfile'                             => 'Upload Files',
+    'assets'                                 => 'Assets',
+    'licenses'                               => 'Licenses',
+    'consumables'                               => 'Consumables',
+    'accessories'                               => 'Accessories',
+    'new_team'                                  => 'New Project Team',
+
+    'completedtask'                             => 'Task Completed ',
+    'delaytask'                                 => 'Task Delayed',
+    'highpriority'                               => 'High Priority',
+    'totaltask'                                 => 'Total Task',
+
+    'helpdesk'                     => 'Issues',
+    'costing'                      =>'Costing Project',
+    'projects'                     => 'Project',
+    'create_implementationplans'   => 'New Project Plan ',
+    'milestones'                   => 'Milestones',
+    'implemntationplans'          =>  'Implementation Plans',
+    'create_milestone'             => 'Create Milestones',
+    'billquantities'               => 'Bill Of Quantities',
+    'create_billquantities'        => 'Create Bill Of Quantities'
+);
