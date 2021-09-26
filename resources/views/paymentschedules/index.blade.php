@@ -182,7 +182,7 @@
                   data-sort-name="name"
                   id="billingTable"
                   class="table table-striped snipe-table"
-                  data-url="{{ route('api.billings.index',['project_id' => $project->id]) }}"
+                  data-url="{{ route('api.billings.index') }}"
                   data-export-options='{
                 "fileName": "export-projects-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","icon"]
