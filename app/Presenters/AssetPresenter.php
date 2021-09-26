@@ -54,7 +54,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/hardware/form.name'),
                 "visible" => true,
-                "formatter" => "hardwareLinkFormatter"
+                // "formatter" => "hardwareLinkFormatter"
             ], [
                 "field" => "image",
                 "searchable" => false,
@@ -69,14 +69,14 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/hardware/table.asset_tag'),
                 "visible" => true,
-                "formatter" => "hardwareLinkFormatter"
+                // "formatter" => "hardwareLinkFormatter"
             ], [
                 "field" => "serial",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/hardware/form.serial'),
                 "visible" => true,
-                "formatter" => "hardwareLinkFormatter"
+                // "formatter" => "hardwareLinkFormatter"
             ],  [
                 "field" => "model",
                 "searchable" => true,
@@ -95,7 +95,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.category'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "categoriesLinkObjFormatter"
             ], 
             [
@@ -103,7 +103,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/hardware/table.status'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "statuslabelsLinkObjFormatter"
             ], 
             [
@@ -111,7 +111,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/hardware/form.checkedout_to'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "polymorphicItemFormatter"
             ], [
                 "field" => "employee_number",
@@ -125,7 +125,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/hardware/table.location'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "deployedLocationFormatter"
             ], [
                 "field" => "rtd_location",
@@ -159,6 +159,7 @@ class AssetPresenter extends Presenter
                 "field" => "purchase_cost",
                 "searchable" => true,
                 "sortable" => true,
+                "visible" => false,
                 "title" => trans('general.purchase_cost'),
                 "formatter" => 'numberWithCommas',
                 "footerFormatter" => 'sumFormatter',

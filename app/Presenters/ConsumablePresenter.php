@@ -25,34 +25,25 @@ class ConsumablePresenter extends Presenter
                 "title" => trans('general.id'),
                 "visible" => false
             ],
-            [
-                "field" => "company",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.company'),
-                "visible" => false,
-                "formatter" => 'companiesLinkObjFormatter',
-            ],
+            // [
+            //     "field" => "company",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('general.company'),
+            //     "visible" => false,
+            //     "formatter" => 'companiesLinkObjFormatter',
+            // ],
 
-            [
-                "field" => "project",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.project'),
-                "visible" => false,
-                "formatter" => 'projectsLinkObjFormatter',
-            ],
-
-            [
-                "field" => "name",
-                "searchable" => true,
-                "sortable" => true,
-                "title" =>trans('admin/consumables/general.name'),
-                "visible" => true,
-                "formatter" => 'consumablesLinkFormatter',
-            ],
+            // [
+            //     "field" => "project",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('general.project'),
+            //     "visible" => false,
+            //     "formatter" => 'projectsLinkObjFormatter',
+            // ],
             [
                 "field" => "image",
                 "searchable" => false,
@@ -61,7 +52,16 @@ class ConsumablePresenter extends Presenter
                 "title" => trans('general.image'),
                 "visible" => false,
                 "formatter" => 'imageFormatter',
-            ], [
+            ],
+            [
+                "field" => "name",
+                "searchable" => true,
+                "sortable" => true,
+                "title" =>trans('admin/consumables/general.name'),
+                "visible" => true,
+                // "formatter" => 'consumablesLinkFormatter',
+            ],
+            [
                 "field" => "category",
                 "searchable" => true,
                 "sortable" => true,

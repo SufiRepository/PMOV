@@ -32,7 +32,7 @@ class SubtaskPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('Subtask'),
                 "visible" => true,
-                "formatter" => 'subtasksLinkFormatter',
+                // "formatter" => 'subtasksLinkFormatter',
             ],
            
             // [
@@ -86,7 +86,7 @@ class SubtaskPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/hardware/table.status'),
                 "visible" => true,
-                "formatter" => "statustasksLinkObjFormatter"
+                // "formatter" => "statustasksLinkObjFormatter"
             ], 
 
 
@@ -150,15 +150,6 @@ class SubtaskPresenter extends Presenter
                 "title" => trans('admin/subtasks/table.duration'),
                 // "formatter" => "notesFormatter"
                 "footerFormatter" => 'sumDurationFormatter',            
-            ],
-
-            [
-                "field" => "contractor",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('admin/contractors/table.contractors'),
-                "formatter" => "contractorsLinkObjFormatter"
             ],
            
             [

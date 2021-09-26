@@ -22,37 +22,38 @@ class LicensePresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('general.id'),
                 "visible" => false
-            ], [
-                "field" => "company",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/companies/table.title'),
-                "visible" => false,
-                "formatter" => "companiesLinkObjFormatter"
-            ],
-            [
-                "field" => "project",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/projects/table.title'),
-                "visible" => false,
-                "formatter" => "projectsLinkObjFormatter"
-            ],
+            ], 
+            // [
+            //     "field" => "company",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('admin/companies/table.title'),
+            //     "visible" => false,
+            //     "formatter" => "companiesLinkObjFormatter"
+            // ],
+            // [
+            //     "field" => "project",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('admin/projects/table.title'),
+            //     "visible" => false,
+            //     "formatter" => "projectsLinkObjFormatter"
+            // ],
             
             [
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/licenses/table.title'),
-                "formatter" => "licensesLinkFormatter"
+                // "formatter" => "licensesLinkFormatter"
             ], [
                 "field" => "product_key",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/licenses/form.license_key'),
-                "formatter" => "licensesLinkFormatter"
+                // "formatter" => "licensesLinkFormatter"
             ], 
             
             [

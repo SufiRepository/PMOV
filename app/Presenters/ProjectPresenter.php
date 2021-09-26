@@ -29,7 +29,7 @@ class ProjectPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/projects/table.project_name'),
                 "visible" => true,
-                "formatter" => "projectsLinkFormatter"
+                "formatter" => ""
             ],
             
 
@@ -39,13 +39,15 @@ class ProjectPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/projects/table.projectnumber'),
                 "visible" => true,
-                "formatter" => "projectsLinkFormatter"
+                "switchable" => true,
+                "formatter" => ""
             ],
             [
                 "field" => "start_date",
                 "searchable" => true,
                 "sortable" => true,
-                "visible" => true,
+                "visible" => false,
+                "switchable" => true,
                 "title" => trans('admin/projects/table.start_date'),
                 'formatter' => 'dateDisplayFormatter'
             ], 
@@ -55,6 +57,7 @@ class ProjectPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
+                "switchable" => true,
                 "title" => trans('admin/projects/table.end_date'),
                 'formatter' => 'dateDisplayFormatter'
             ],
@@ -63,7 +66,8 @@ class ProjectPresenter extends Presenter
                 "field" => "value",
                 "searchable" => true,
                 "sortable" => true,
-                "visible" => true,
+                "visible" => false,
+                "switchable" => true,
                 "title" => trans('admin/projects/table.project_value'),
                 "footerFormatter" => 'sumFormatter',
             ], 
@@ -72,7 +76,7 @@ class ProjectPresenter extends Presenter
                 "field" => "duration",
                 "searchable" => true,
                 "sortable" => true,
-                "visible" => true,
+                "visible" => false,
                 "title" => trans('Duration'),
                 "footerFormatter" => 'sumDurationFormatter',            
             
@@ -82,7 +86,7 @@ class ProjectPresenter extends Presenter
                 "field" => "details",
                 "searchable" => true,
                 "sortable" => true,
-                "visible" => true,
+                "visible" => false,
                 "title" => trans('general.details'),
                 "formatter" => "notesFormatter"
              ],
@@ -121,7 +125,7 @@ class ProjectPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('general.admin'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "usersLinkObjFormatter"
             ],
 
@@ -129,7 +133,7 @@ class ProjectPresenter extends Presenter
                 "field" => "location",
                 "searchable" => true,
                 "sortable" => true,
-                "visible" => true,
+                "visible" => false,
                 "title" => trans('admin/hardware/table.location'),
                 "formatter" => "deployedLocationFormatter"
             ],

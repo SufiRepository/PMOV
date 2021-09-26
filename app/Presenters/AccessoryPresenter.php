@@ -29,55 +29,62 @@ class AccessoryPresenter extends Presenter
                 "title" => trans('admin/hardware/table.image'),
                 "visible" => true,
                 "formatter" => "imageFormatter"
-            ], [
-                "field" => "company",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/companies/table.title'),
-                "visible" => false,
-                "formatter" => "companiesLinkObjFormatter"
             ], 
+            // [
+            //     "field" => "company",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('admin/companies/table.title'),
+            //     "visible" => false,
+            //     "formatter" => "companiesLinkObjFormatter"
+            // ], 
 
-            [
-                "field" => "project",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/projects/table.title'),
-                "visible" => false,
-                "formatter" => "projectsLinkObjFormatter"
-            ], 
+            // [
+            //     "field" => "project",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('admin/projects/table.title'),
+            //     "visible" => false,
+            //     "formatter" => "projectsLinkObjFormatter"
+            // ], 
 
             [
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
+                "visible" => true,
                 "title" => trans('admin/accessories/general.accessory_name'),
-                "formatter" => "accessoriesLinkFormatter"
-            ], [
-                "field" => "category",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/accessories/general.accessory_category'),
-                "formatter" => "categoriesLinkObjFormatter"
+                // "formatter" => "accessoriesLinkFormatter"
             ], 
-
+            
             [
                 "field" => "serial",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/accessories/table.serial_No') ,
-                "formatter" => "accessoriesLinkFormatter"
+                // "formatter" => "accessoriesLinkFormatter"
             ],
 
-            // [
-            //     "field" => "model_number",
-            //     "searchable" => true,
-            //     "sortable" => true,
-            //     "title" => trans('admin/models/table.modelnumber'),
-            //     "formatter" => "accessoriesLinkFormatter"
-            // ], 
+            [
+                "field" => "model_number",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => trans('admin/models/table.modelnumber'),
+                // "formatter" => "accessoriesLinkFormatter"
+            ], 
+            [
+                "field" => "category",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/accessories/general.accessory_category'),
+                "formatter" => "categoriesLinkObjFormatter"
+            ], 
+
+            
             [
                 "field" => "manufacturer",
                 "searchable" => true,
@@ -96,22 +103,26 @@ class AccessoryPresenter extends Presenter
                 "field" => "location",
                 "searchable" => true,
                 "sortable" => true,
+                "visible" => false,
                 "title" => trans('general.location'),
                 "formatter" => "locationsLinkObjFormatter",
             ], [
                 "field" => "qty",
                 "searchable" => false,
                 "sortable" => false,
+                "visible" => true,
                 "title" => trans('admin/accessories/general.total'),
             ],  [
                 "field" => "min_qty",
                 "searchable" => false,
                 "sortable" => true,
+                "visible" => false,
                 "title" => trans('general.min_amt'),
             ], [
                 "field" => "remaining_qty",
                 "searchable" => false,
                 "sortable" => false,
+                "visible" => false,
                 "title" => trans('admin/accessories/general.remaining'),
             ], [
                 "field" => "purchase_date",
@@ -124,6 +135,7 @@ class AccessoryPresenter extends Presenter
                 "field" => "purchase_cost",
                 "searchable" => true,
                 "sortable" => true,
+                "visible" => false,
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
             ], [
@@ -144,6 +156,7 @@ class AccessoryPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => false,
                 "switchable" => false,
+                "visible" => true,
                 "title" => trans('table.actions'),
                 "formatter" => "accessoriesActionsFormatter",
             ]

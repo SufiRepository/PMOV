@@ -1,10 +1,16 @@
 <?php
 
+
 namespace App\Presenters;
 
+use App\Helpers\Helper;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 /**
- * Class ComponentPresenter
+ * Class UserPresenter
  * @package App\Presenters
  */
 class TaskPresenter extends Presenter
@@ -31,7 +37,7 @@ class TaskPresenter extends Presenter
                 "sortable" => true,
                 "visible" => true,
                 "title" => trans('admin/tasks/table.numsubtask'),
-                "formatter" => "tasksLinkFormatter"
+                // "formatter" => "tasksLinkFormatter"
             ],
             
             [
