@@ -97,7 +97,7 @@ class TasksController extends Controller
                     ->get();
 
     $teams          = DB::table('teams')
-                    ->where('teams.project_id','=',$projectid)
+                    ->where('teams.project_id','=',$id)
                     ->leftJoin('users', 'teams.user_id','=','users.id')
                     ->get();
                            
