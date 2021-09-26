@@ -164,6 +164,25 @@ public function count_by_company () {
     }
 }
 
+public function count_by_user() {
+
+    $user = new User;
+
+    // if (Auth::user()->isSuperUser()) {
+    //     return DB::table('assets')
+    //             ->select('assets.*')
+    //             ->where('assets.deleted_at','=',null)
+    //             ->count();
+    // } else {
+    return DB::table('tasks as a')
+                // ->leftJoin('users as b','a.company_id','=','b.company_id')
+                ->where('user_id', Auth::id())
+                ->where('a.deleted_at','=',null)
+                ->count();
+    
+}
+
+
 public function count_by_priority() {
 
     $user = new User;

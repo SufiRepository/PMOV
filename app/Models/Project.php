@@ -138,7 +138,7 @@ class Project extends SnipeModel
 
 
 
-    public static function getIdForCurrentProject($unescaped_input)
+    public static function getIdForCurrentProject($id)
     {
        
             $current_project = Auth::project();

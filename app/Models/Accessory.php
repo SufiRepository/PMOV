@@ -57,6 +57,7 @@ class Accessory extends SnipeModel
     public $rules = array(
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
+        'model_number'      => 'required|min:1',
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'project_id'        => 'integer|nullable',
@@ -86,6 +87,7 @@ class Accessory extends SnipeModel
         'project_id',
         'location_id',
         'name',
+        'modelno',
         'order_number',
         'purchase_cost',
         'purchase_date',
