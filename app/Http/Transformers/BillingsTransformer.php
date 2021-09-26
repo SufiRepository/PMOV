@@ -26,18 +26,11 @@ class BillingsTransformer
     {
         $array = [
             'id'   => (int)$billing->id,
-            'name' => e($billing->name),
-            'details' => e($billing->details),
-            'costing' => e($billing->costing),
+            'task_name' => e($billing->task_name),
+            'amount' => e($billing->amount),
+            'billingdate'          => Helper::getFormattedDateObject($billing->billingdate, 'datetime'),
+            'description' => e($billing->description),
 
-
-            'project'        => ($billing->project)        ? ['id' => $billing->project->id,'name'=> e($billing->project->name)] : null,
-            'task'        => ($billing->task)        ? ['id' => $billing->task->id,'name'=> e($billing->task->name)] : null,
-
-            'invoice_no' => e($billing->invoice_no),
-            'deliveryorder_no' => e($billing->deliveryorder_no),
-            'supportingdocument' => e($billing->supportingdocument),
-            
         ];
 
         $permissions_array['available_actions'] = [

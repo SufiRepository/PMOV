@@ -25,9 +25,11 @@ class PaymentSchedulesTransformer
     {
         $array = [
             'id'   => (int)$paymentschedule->id,
-            'name' => e($paymentschedule->name),
-            'costing' => e($paymentschedule->costing),
+            'name' => e($paymentschedule->task_name),
+            'description' => e($paymentschedule->description),
+            'paymentdate' => e($paymentschedule->costing),
             'details' => e($paymentschedule->details),
+            'paymentdate'          => Helper::getFormattedDateObject($paymentschedule->paymentdate, 'datetime'),
 
             'contractor'  => e($paymentschedule->contractor)          ? ['id' => (int) $paymentschedule  -> contractor           ->   id, 'name'  => e($paymentschedule->contractor->name)] : null,
             'supplier'    => e($paymentschedule->supplier)            ? ['id' => (int) $paymentschedule  -> supplier             ->   id, 'name'  => e($paymentschedule->supplier->name)] : null,

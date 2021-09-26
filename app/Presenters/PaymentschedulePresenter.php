@@ -27,13 +27,13 @@ class PaymentSchedulePresenter extends Presenter
             ],
 
             [
-                "field" => "task",
+                "field" => "task_name",
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => trans('Tasks'),
+                "title" => trans('Name'),
                 "visible" => false,
-                "formatter" => "tasksLinkObjFormatter"
+                "formatter" => "notesFormatter"
             ], 
           
             [
@@ -50,18 +50,9 @@ class PaymentSchedulePresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('Payment Schedule'),
-                'formatter' => 'dateDisplayFormatter'
-            ],  
-
-            [
-                "field" => "paymentdate",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => true,
                 "title" => trans('Payment Date'),
-                'formatter' => 'dateDisplayFormatter'
-            ],
+                'formatter' => "notesFormatter"
+            ],  
 
             [
                 "field" => "amount",
@@ -72,22 +63,22 @@ class PaymentSchedulePresenter extends Presenter
                 "footerFormatter" => 'sumFormatter',
             ], 
             [
-                "field" => "descriptions",
+                "field" => "description",
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('Descriptions'),
+                "title" => trans('Description'),
                 "formatter" => "notesFormatter"
             ],
-            [
-                "field" => "actions",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
-                "visible" => true,
-                "formatter" => "paymentschedulesActionsFormatter",
-            ]
+            // [
+            //     "field" => "actions",
+            //     "searchable" => false,
+            //     "sortable" => false,
+            //     "switchable" => false,
+            //     "title" => trans('table.actions'),
+            //     "visible" => true,
+            //     "formatter" => "paymentschedulesActionsFormatter",
+            // ]
         ];
         return json_encode($layout);
     }

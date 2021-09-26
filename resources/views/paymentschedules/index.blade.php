@@ -122,11 +122,11 @@
         <div class="tab-pane active" id="payment">
           <div class="row">
             <div class="col-md-12">
-                <div class="box-header with-border">
+                {{-- <div class="box-header with-border">
                   <div class="box-heading">
-                    {{-- <h2 class="box-title"> {{ trans('general.listoffiles') }}</h2> --}}
+                    <h2 class="box-title"> {{ trans('general.listoffiles') }}</h2>
                   </div>
-                </div><!-- /.box-header -->    
+                </div><!-- /.box-header -->     --}}
                 <div class="box">
                 <div class="box-body">
 

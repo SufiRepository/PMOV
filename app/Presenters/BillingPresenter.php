@@ -27,34 +27,14 @@ class BillingPresenter extends Presenter
             ],
 
             [
-                "field" => "task",
+                "field" => "task_name",
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => trans('Tasks'),
+                "title" => trans('Name'),
                 "visible" => false,
-                "formatter" => "tasksLinkObjFormatter"
+                "formatter" => "notesFormatter"
             ], 
-          
-            [
-                "field" => "project",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('Project'),
-                "visible" => false,
-                "formatter" => "projectsLinkObjFormatter"
-            ], 
-           
-
-            [
-                "field" => "paymentdate",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => true,
-                "title" => trans('Payment Schedule'),
-                'formatter' => 'dateDisplayFormatter'
-            ],  
 
             [
                 "field" => "billingdate",
@@ -62,7 +42,7 @@ class BillingPresenter extends Presenter
                 "sortable" => true,
                 "visible" => true,
                 "title" => trans('Billing Date'),
-                'formatter' => 'dateDisplayFormatter'
+                'formatter' => "notesFormatter"
             ],  
 
             [
@@ -81,15 +61,15 @@ class BillingPresenter extends Presenter
                 "title" => trans('Descriptions'),
                 "formatter" => "notesFormatter"
             ],
-            [
-                "field" => "actions",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
-                "visible" => true,
-                "formatter" => "paymentschedulesActionsFormatter",
-            ]
+            // [
+            //     "field" => "actions",
+            //     "searchable" => false,
+            //     "sortable" => false,
+            //     "switchable" => false,
+            //     "title" => trans('table.actions'),
+            //     "visible" => true,
+            //     "formatter" => "paymentschedulesActionsFormatter",
+            // ]
         ];
         return json_encode($layout);
     }
