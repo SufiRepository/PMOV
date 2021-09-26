@@ -32,7 +32,7 @@
     <label for="costing" class="col-md-3 control-label"></label>
         <div class="col-md-9">
             <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
-                <input type="checkbox" id="milestone" name="milestone" value="1" class="minimal">
+                <input type="checkbox" id="milestone" name="milestone" value="Yes" class="minimal">
                     <label for="milestone">{{ trans('admin/tasks/form.milestone') }}</label>
             {{--   <input type="radio" id="task" name="type" value="Task">
               <label for="Task">Task</label><br>           --}}

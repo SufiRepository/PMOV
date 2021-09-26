@@ -9,7 +9,7 @@
 {{-- Page content --}}
 @section('inputFields')
 
-<input type="hidden" id="subtask" name="subtasks_id" value="{{request()->get('id')}}">
+<input type="text" id="subtask" name="subtasks_id" value="{{request()->get('id')}}">
 
 <!-- filename -->
 <div class="form-group {{ $errors->has('filename') ? ' has-error' : '' }}">

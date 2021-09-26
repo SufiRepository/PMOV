@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SubtaskFile;
+use App\Models\File;
+use App\Models\Subtask;
 // use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -56,6 +58,7 @@ class SubtasksUploadController extends Controller
             'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
             ]);
     
+            $projectfiles = new File;
             $fileModel = new SubtaskFile;
     
             if($request->file()) {
@@ -68,6 +71,21 @@ class SubtasksUploadController extends Controller
                 $fileModel->name = $request->input('filename');
                 $fileModel->file_path = '/storage/' . $filePath;
                 $fileModel->save();
+
+                $fileName = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                $projectfilespath = $request->file('file')->storeAs('project_files', $fileName, 'public');
+    
+                $projectfiles->filename = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                $projectfiles->subtask_id = $request->input('subtasks_id');
+                $projectfiles->notes = $request->input('notes');
+                $projectfiles->name = $request->input('filename');
+                $projectfiles->file_path = '/storage/' . $projectfilespath;
+
+
+                $subtask = Subtask::find($request->input('subtasks_id'));
+                $projectfiles->file_location = $subtask->name;
+                $projectfiles->project_id = $subtask->project_id;
+                $projectfiles->save();
     
                 // return redirect()->route('subtaskuploads.index')
                 // ->with('success','File has been uploaded.')

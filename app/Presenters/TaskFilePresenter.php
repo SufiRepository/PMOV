@@ -17,23 +17,41 @@ class TaskFilePresenter extends Presenter
     public static function dataTableLayout()
     {
         $layout = [
-            [
-                "field" => "id",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.id'),
-                "visible" => false
-            ],
+            // [
+            //     "field" => "id",
+            //     "searchable" => false,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('general.id'),
+            //     "visible" => false
+            // ],
 
             [
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => trans('admin/implementationplans/form.filenames'),
+                "title" => trans('Filename'),
                 "visible" => true,
                 // "formatter" => 'subtasksLinkFormatter',
             ],
+   
+            [
+                "field" => "file_path",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "Download",
+                "visible" => true,
+                "formatter" => 'taskdownloadLinkFormatter',
+            ],
+
+            // [
+            //     "field" => "created_at",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "visible" => true,
+            //     "title" => trans('Uploaded Date/Time'),
+            //     'formatter' => 'dateDisplayFormatter'
+            // ],
 
             [
                 "field" => "notes",
@@ -42,24 +60,6 @@ class TaskFilePresenter extends Presenter
                 "title" => trans('Notes'),
                 "visible" => true,
                 "formatter" => 'notesFormatter',
-            ],
-            
-            [
-                "field" => "file_path",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => "File",
-                "visible" => true,
-                "formatter" => 'taskdownloadLinkFormatter',
-            ],
-
-            [
-                "field" => "created_at",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => true,
-                "title" => trans('Uploaded Date/Time'),
-                'formatter' => 'dateDisplayFormatter'
             ],
             
             [
