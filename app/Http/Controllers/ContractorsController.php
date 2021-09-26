@@ -24,7 +24,7 @@ class ContractorsController extends Controller
     public function index()
     {
         // Grab all the contractors
-        $this->authorize('view', Contractor::class);
+        // $this->authorize('view', Contractor::class);
 
         $clientcount = new Client;
         $contractorcount = new Contractor;
@@ -64,7 +64,7 @@ class ContractorsController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
-        $this->authorize('create', Contractor::class);
+        // $this->authorize('create', Contractor::class);
         // Create a new Contractor
         $contractor = new Contractor;
         // Save the location data
@@ -102,7 +102,7 @@ class ContractorsController extends Controller
      */
     public function edit($contractorId = null)
     {
-        $this->authorize('update', Contractor::class);
+        // $this->authorize('update', Contractor::class);
         // Check if the Contractor exists
         if (is_null($item = Contractor::find($contractorId))) {
             // Redirect to the Contractor  page
@@ -124,7 +124,7 @@ class ContractorsController extends Controller
      */
     public function addproject($contractorId = null)
     {
-        $this->authorize('update', Contractor::class);
+        // $this->authorize('update', Contractor::class);
         // Check if the Contractor exists
         if (is_null($item = Contractor::find($contractorId))) {
             // Redirect to the Contractor  page
@@ -147,7 +147,7 @@ class ContractorsController extends Controller
      */
     public function update($contractorId, ImageUploadRequest $request)
     {
-        $this->authorize('update', Contractor::class);
+        // $this->authorize('update', Contractor::class);
         // Check if the contractor exists
         if (is_null($contractor = Contractor::find($contractorId))) {
             // Redirect to the contractor  page
@@ -189,7 +189,7 @@ class ContractorsController extends Controller
      */
     public function destroy($contractorId)
     {
-        $this->authorize('delete', Contractor::class);
+        // $this->authorize('delete', Contractor::class);
         if (is_null($contractor = Contractor::find($contractorId))) {
             return redirect()->route('contractors.index')->with('error', trans('admin/contractors/message.not_found'));
         }

@@ -55,14 +55,14 @@
   </div><!-- ./col -->
 
   {{-- task --}}
-  <div class="col-lg-2 col-xs-3 ">
+  {{-- <div class="col-lg-2 col-xs-3 "> --}}
     <!-- small box -->
-    @can('index', \App\Models\Task::class)
-        <a href="{{ route('tasks.index') }}">
+    {{-- @can('index', \App\Models\Task::class) --}}
+        {{-- <a href="{{ route('tasks.index') }}">
       <div class="small-box bg-orange">
         <div class="inner">
           <h3> {{ number_format($counts['task']) }}</h3>
-          {{-- <h3> 0 </h3> --}}
+          <h3> 0 </h3>
             <p>{{ trans('general.tasks') }}</p>
         </div>
         <div class="icon" aria-hidden="true">
@@ -74,7 +74,7 @@
         @endcan
       </div>
     @endcan
-  </div><!-- ./col -->
+  </div><!-- ./col --> --}}
 
 {{-- staff --}}
   <div class="col-lg-2 col-xs-3" style="float:right;margin:auto;">

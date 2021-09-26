@@ -200,6 +200,10 @@ class ProjectsController extends Controller
             // ->where('statustask_id','=','Delayed') 
             ->where('deleted_at','=',null) 
             ->count();
+            $issuetotal = DB::table('helpdesks')->where('project_id',$project->id)
+            // ->where('statustask_id','=','Delayed') 
+            ->where('deleted_at','=',null) 
+            ->count();
 
 
                 //$counts['asset'] = \App\Models\Asset::count();
@@ -224,6 +228,7 @@ class ProjectsController extends Controller
                     ->with(compact('taskcompleted'))
                     ->with(compact('taskdelayed'))
                     ->with(compact('tasktotal'))
+                    ->with(compact('$issuetotal'))
 
               ->with(['counts'=> $counts, 'role_id' => $role_id]) ;
             
@@ -407,10 +412,10 @@ class ProjectsController extends Controller
             ->where('deleted_at','=',null) 
             ->count();
 
-            // $issuetotal = DB::table('helpdesks')->where('project_id',$projectId)
-            // // ->where('statustask_id','=','Delayed') 
-            // ->where('deleted_at','=',null) 
-            // ->count();
+            $issuetotal = DB::table('helpdesks')->where('project_id',$projectId)
+            // ->where('statustask_id','=','Delayed') 
+            ->where('deleted_at','=',null) 
+            ->count();
 
             // return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
 
@@ -422,7 +427,7 @@ class ProjectsController extends Controller
             ->with(compact('taskcompleted'))
             ->with(compact('taskdelayed'))
             ->with(compact('tasktotal'))
-            // ->with(compact('$issuetotal'))
+            ->with(compact('$issuetotal'))
 
 
 
