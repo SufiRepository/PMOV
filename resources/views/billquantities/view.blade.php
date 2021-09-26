@@ -142,6 +142,20 @@
           </div>
           @endif
 
+          @if ($billquantity->filename)
+           <div class="row">
+             <div class="col-md-4">
+               <strong>
+                {{ trans('admin/billquantities/form.buy_value') }}
+               </strong>
+              </div>
+               <div class="col-md-8">
+                {{-- {{ \App\Helpers\Helper::formatCurrencyOutput($billquantity->filename) }} --}}
+                <a href="{{ url('/') }}/bom-file-download/?file={{$billquantity->filename}}">Download</a>
+               </div>
+          </div>
+          @endif
+
 
            </div>
         </div>

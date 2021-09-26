@@ -849,6 +849,8 @@ Route::get('/subtaskPO-file-download',['as' => 'subtask po download', 'uses' => 
 
 Route::get('/subtaskSD-file-download',['as' => 'subtask sd download', 'uses' => 'DownloadController@download_subtask_sd']);
 
+Route::get('/bom-file-download',['as' => 'bom download', 'uses' => 'DownloadController@download_bom']);
+
 Route::get('/access_level_2', 'AccessLevel2Controller@index')->name('access_level_2')->middleware('access_level_2');
 
 Route::get('/access_level_3', 'AccessLevel3Controller@index')->name('access_level_3')->middleware('access_level_3');

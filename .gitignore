@@ -47,6 +47,7 @@ public/uploads/paymenttasks/*
 public/uploads/paymentsubtask/*
 storage/app/private_uploads/users/*
 public/uploads/departments/*
+public/uploads/bom/*
 storage/debugbar/
 storage/dumps/*
 storage/laravel-backups

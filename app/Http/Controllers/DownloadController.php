@@ -147,4 +147,17 @@ class DownloadController extends Controller
         return back()
         ->with('success','File has been downloaded.');
     }
+
+    public function download_bom(Request $request)
+    {
+        if (Storage::disk('public')->exists("bom/$request->file")) {
+            $path = Storage::disk('public')->path("bom/$request->file");
+            $content = file_get_contents($path);
+            return response($content)->withHeaders([
+                'Content-Type' => mime_content_type($path)
+            ]);
+        }
+        return back()
+        ->with('success','File has been downloaded.');
+    }
 }

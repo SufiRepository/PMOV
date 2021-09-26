@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\BillQuantity;
+use App\Models\File;
 use App\Helpers\Helper;
 
 
@@ -59,6 +60,7 @@ class BillQuantitiesController extends Controller
     {
         $this->authorize('create', BillQuantity::class);
         // Create a new billquantity
+        $projectfiles = new File;
         $billquantity = new BillQuantity;
         // Save the location data
 
@@ -82,7 +84,7 @@ class BillQuantitiesController extends Controller
         $billquantity->net_profit           = request('net_profit');
         $billquantity->option               = request('option');
         $billquantity->remark               = request('remark');
-        $billquantity->filename               = request('filename');
+        $billquantity->filename             = request('filename');
 
 
         $request->validate([
@@ -96,9 +98,18 @@ class BillQuantitiesController extends Controller
                 $filePath = $request->file('file')->storeAs('bom', $fileName, 'public');
     
                 $billquantity->filename = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
-                // $billquantity->subtask_id = $request->input('subtasks_id');
                 $billquantity->name = $request->input('filename');
                 $billquantity->file_path = '/storage/' . $filePath;
+
+                $fileName = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                $filePath = $request->file('file')->storeAs('project_files', $fileName, 'public');
+
+                $projectfiles->filename = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                $projectfiles->name = $request->input('filename');
+                $projectfiles->file_location = ('Bill of Material');
+                $projectfiles->file_path = '/storage/' . $filePath;
+                $projectfiles->project_id    = request('project_id');
+                $projectfiles->save();
     
             }
      
