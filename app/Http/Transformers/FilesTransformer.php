@@ -27,7 +27,8 @@ class FilesTransformer
             'name'          => e($file->name),
             'file_path'     => e($file->file_path),
             'notes'         => e($file->notes), 
-            'filename'      => e($file->filename),         
+            'filename'      => e($file->filename),
+            'file_location' => e($file->file_location),         
             'created_at'    => Helper::getFormattedDateObject($file->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($file->updated_at, 'datetime'),
         ];

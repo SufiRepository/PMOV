@@ -153,7 +153,7 @@ class TasksController extends Controller
             $task = new Task();
             $task->company_id                   = Company::getIdForCurrentUser($request->input('company_id'));
             $task->user_id                      = Auth::id();
-            $task->milestone                    = $request->input('milestone', 0);
+            $task->milestone                    = $request->input('milestone', 'No');
             $task->team_member                  = $request->input('team_member');
             $task->implementationplan_id        = $request->input('implementationplan_id');
             $task->project_id                   = $request->input('project_id');

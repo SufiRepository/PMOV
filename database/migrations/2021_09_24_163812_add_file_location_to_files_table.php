@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMilestoneToTasksTable extends Migration
+class AddFileLocationToFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddMilestoneToTasksTable extends Migration
      */
     public function up()
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->string('milestone')->nullable();
-
+        Schema::table('files', function (Blueprint $table) {
+            $table->string('file_location')->nullable();
         });
     }
 
@@ -26,8 +25,8 @@ class AddMilestoneToTasksTable extends Migration
      */
     public function down()
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->dropColumn('milestone');
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropColumn('file_location');
         });
     }
 }

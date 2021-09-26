@@ -17,28 +17,36 @@ class FilePresenter extends Presenter
     public static function dataTableLayout()
     {
         $layout = [
-            [
-                "field" => "id",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.id'),
-                "visible" => false
-            ],
+            // [
+            //     "field" => "id",
+            //     "searchable" => false,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('general.id'),
+            //     "visible" => false
+            // ],
 
             [
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => trans('admin/billquantities/table.names'),
+                "title" => trans('Filename'),
                 "visible" => true,
                 // "formatter" => 'subtasksLinkFormatter',
             ],
-              [
+            [
+                "field" => "file_location",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => trans('File Location'),
+                'formatter' => 'notesFormatter'
+            ],
+            [
                 "field" => "file_path",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => "File",
+                "title" => "Download",
                 "visible" => true,
                 "formatter" => 'projectdownloadLinkFormatter',
             ],
@@ -50,18 +58,7 @@ class FilePresenter extends Presenter
                 "visible" => true,
                 "formatter" => 'notesFormatter',
             ],
-            
-          
-
-            [
-                "field" => "created_at",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => true,
-                "title" => trans('Uploaded Date/Time'),
-                'formatter' => 'dateDisplayFormatter'
-            ],
-            
+             
             [
                 "field" => "actions",
                 "searchable" => false,

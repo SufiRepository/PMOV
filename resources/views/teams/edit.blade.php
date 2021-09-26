@@ -18,41 +18,41 @@
 
   <!-- Asset Tag -->
 <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
-    <label for="asset_tag" class="col-md-3 control-label">{{ trans('Add Members') }}</label>
+    <label for="asset_tag" class="col-md-3 control-label">{{ trans('Members') }}</label>
 
     <!-- we are creating a new asset - let people use more than one asset tag -->
-        <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-
+        <div class="col-md-7 col-sm-12">
             <select class="form-control" name="user_id[]" id="asset_tag" value="{{ Request::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" style="width: 100%">
-            <option value="0"></option>   
-             @foreach ($users as $user )       
+                <option value="0"></option>   
+                    @foreach ($users as $user )       
                         <option  value="{{ $user->id }}"> 
                             {{ $user->username }} 
                         </option>
-                @endforeach
+                    @endforeach
             </select>
             {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
         </div>
         <div class="col-md-2 col-sm-12">
-            <button class="add_field_button btn btn-default btn-sm">
-                <i class="fa fa-plus"></i>
-            </button>
+            <span class="hovertext" data-hover="Add members">
+                <button class="add_field_button btn btn-default btn-sm">
+                    <i class="fa fa-plus"></i>  
+                </button>
+            </span>
         </div>
             <br><br><br> 
         <label for="ItemLabel" class="col-md-3 control-label">{{ trans('Project Role') }}</label>
   {{-- <label class="ItemLabel">project Role:</label> --}}
-
-  <div class="col-md-7 col-sm-12">
-    <select class="form-control" name="role_id[]" style="width: 100%">
-       <option value="0"></option>  
-       @foreach ($roles as $role)    
-                <option  value="{{ $role->id }}"> 
-                    {{ $role->name }} 
-                </option>
-        @endforeach    
-    </select>
-  </div>
+            <div class="col-md-7 col-sm-12">
+                <select class="form-control" name="role_id[]" style="width: 100%">
+                    <option value="0"></option>  
+                        @foreach ($roles as $role)    
+                    <option  value="{{ $role->id }}"> 
+                        {{ $role->name }} 
+                    </option>
+                        @endforeach    
+                </select>
+            </div>
 </div>
 
 
@@ -162,7 +162,7 @@
     // Add another asset tag + serial combination if the plus sign is clicked
     $(document).ready(function() {
 
-        var max_fields      = 100; //maximum input boxes allowed
+        var max_fields      = 10; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         var x               = 1; //initial text box count
@@ -191,35 +191,39 @@
 
                 box_html += '<span class="fields_wrapper">';
                 box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('Add Members') }} ' + x + '</label>';
-                box_html += '<div class="col-md-7 col-sm-12 required">';
+                box_html += '<div class="col-md-7 col-sm-12">';
                 box_html += '<select class="form-control"name="user_id[]" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" data-validation="required">';
+                box_html += '<option value="0"></option>';
                 box_html += '@foreach ($users as $user)';
                 box_html += '<option value="{{ $user->id }}">';
-                box_html += ' {{ $user->username }} ';
+                box_html += '{{ $user->username }} ';
                 box_html += '</option>';
                 box_html += '@endforeach';
                 box_html += '</select>';
                 box_html += '</div>';
                 box_html += '<div class="col-md-2 col-sm-12">';
+                // box_html += '<span class="hovertext" data-hover="Remove members">';
                 box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><i class="fa fa-minus"></i></a>';
+                // box_html += '</span>';
                 box_html += '</div>';
                 box_html += '</div>';
 
-                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('Select Role') }} ' + x + '</label>';
+                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('Project Role') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12">';
-                box_html += '<div class="form-group col-sm-12 col-md-12">'
-                box_html += '<div class="col-md-20">'
-                box_html += '<div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">'
-                box_html += '<select class="form-control" name="role_id[]" style="width: 100%">'
-                box_html += '@foreach ($roles as $role)'
-                box_html += '<option name="role_id[]" value="{{ $role->id }}">'
-                box_html += ' {{ $role->name }} '
-                box_html += '</option>'
-                box_html += '@endforeach'
-                box_html += '</select>'
-                box_html += '</div>'
-                box_html += '</div>'
-                box_html += '</div> '
+                // box_html += '<div class="form-group col-sm-12 col-md-12">';
+                // box_html += '<div class="col-md-20">';
+                // box_html += '<div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">';
+                box_html += '<select class="form-control" name="role_id[]" style="width: 100%">';
+                box_html += '<option value="0"></option>';
+                box_html += '@foreach ($roles as $role)';
+                box_html += '<option name="role_id[]" value="{{ $role->id }}">';
+                box_html += ' {{ $role->name }} ';
+                box_html += '</option>';
+                box_html += '@endforeach';
+                box_html += '</select>';
+                // box_html += '</div>';
+                // box_html += '</div>';
+                // box_html += '</div> ';
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</span>';
@@ -245,4 +249,33 @@
 
 
 </script>
+<style>
+.hovertext {
+    position: relative;
+    border-bottom: 1px dotted black;
+  }
+  
+  .hovertext:before {
+    content: attr(data-hover);
+    visibility: hidden;
+    opacity: 0;
+    width: 140px;
+    background-color: rgb(145, 141, 141);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    transition: opacity 1s ease-in-out;
+  
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 110%;
+  }
+  
+  .hovertext:hover:before {
+    opacity: 1;
+    visibility: visible;
+  }
+  </style>
 @stop

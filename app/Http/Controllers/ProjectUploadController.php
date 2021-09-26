@@ -140,7 +140,7 @@ class ProjectUploadController extends Controller
      */
     public function destroy($fileId)
     {
-        // $this->authorize('delete', File::class);
+    //    $this->authorize('delete', File::class);
         if (is_null($file = File::find($fileId))) {
             return redirect()->route('projects.index')->with('error', trans('admin/clients/message.not_found'));
         }
@@ -151,6 +151,7 @@ class ProjectUploadController extends Controller
         );
 
         $projectId = $fileModel->project_id;
+        
         return redirect()->route('projectsreroute', ['projectid' => $projectId]) ->with('success','File has been uploaded.');
     }
 

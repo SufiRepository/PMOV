@@ -134,8 +134,9 @@ class ProjectUploadController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($assignworkId)
+    public function destroy($id)
     {
+        dd($id);
         //$this->authorize('delete', Team::class);
         $File = File::findOrFail($id);
         $this->authorize($File);

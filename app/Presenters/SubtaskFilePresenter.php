@@ -17,40 +17,49 @@ class SubtaskFilePresenter extends Presenter
     public static function dataTableLayout()
     {
         $layout = [
-            [
-                "field" => "id",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.id'),
-                "visible" => false
-            ],
+            // [
+            //     "field" => "id",
+            //     "searchable" => false,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('general.id'),
+            //     "visible" => false
+            // ],
 
             [
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => trans('general.name'),
+                "title" => trans('Filename'),
                 "visible" => true,
                 // "formatter" => 'subtasksLinkFormatter',
             ],
 
-            [
-                "field" => "created_at",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => "Date Uploaded",
-                "visible" => true,
-                "formatter" => 'dateDisplayFormatter',
-            ],
+            // [
+            //     "field" => "created_at",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "title" => "Date Uploaded",
+            //     "visible" => true,
+            //     "formatter" => 'dateDisplayFormatter',
+            // ],
             
             [
                 "field" => "file_path",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => "File",
+                "title" => "Download",
                 "visible" => true,
                 "formatter" => 'subtaskdownloadLinkFormatter',
+            ],
+
+            [
+                "field" => "notes",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('Notes'),
+                "visible" => true,
+                "formatter" => 'notesFormatter',
             ],
 
             [

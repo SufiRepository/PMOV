@@ -516,25 +516,23 @@
     }
 
     function projectdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/project-file-download/?file=' + row.filename + '">Download</a>';
+            return '<a href="{{ url('/') }}/project-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
     }
 
     function implementationdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/implementation-file-download/?file=' + row.filename + '">Download</a>';
+            return '<a href="{{ url('/') }}/implementation-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
     }
 
-    
-
     function taskdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/task-file-download/?file=' + row.filename + '">Download</a>';
+            return '<a href="{{ url('/') }}/task-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
     }
 
     function subtaskdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/subtask-file-download/?file=' + row.filename + '">Download</a>';
+            return '<a href="{{ url('/') }}/subtask-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
     }
     // bahagian po do sd
     function purchaseodertaskdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/purchaseodertask-file-download/?file=' + row.filename + '">Download</a>';
+            return '<a href="{{ url('/') }}/purchaseodertask-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
     }
 
     function trueFalseFormatter(value) {
