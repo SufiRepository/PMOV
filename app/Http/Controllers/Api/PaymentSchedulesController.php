@@ -7,7 +7,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\PaymentSchedulesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-use App\Models\PaymentSchedules;
+use App\Models\PaymentSchedule;
 
 use App\Models\Company;
 use App\Models\Project;
@@ -29,11 +29,11 @@ class PaymentSchedulesController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', PaymentSubtask::class);
-        $allowed_columns = ['id','details','created_at','user_id','project_id'];
+        // $this->authorize('view', PaymentSubtask::class);
+        $allowed_columns = ['id','task_name','amount','paymentdate','contractor_id','description','created_at','user_id','project_id'];
 
         
-        $paymentschedules = PaymentSubtask::select('paymentschedules.*');
+        $paymentschedules = PaymentSchedule::select('paymentschedules.*');
 
         if ($request->filled('search')) {
             $paymentschedules = $paymentschedules->TextSearch($request->input('search'));
@@ -43,13 +43,13 @@ class PaymentSchedulesController extends Controller
             $paymentschedules->where('project_id','=',$request->input('project_id'));
         }
 
-        if ($request->filled('user_id')) {
-            $paymentschedules->where('user_id','=',$request->input('user_id'));
-        }
+        // if ($request->filled('user_id')) {
+        //     $paymentschedules->where('user_id','=',$request->input('user_id'));
+        // }
 
-        if ($request->filled('subtask_id')) {
-            $paymentschedules->where('subtask_id','=',$request->input('subtask_id'));
-        }
+        // if ($request->filled('subtask_id')) {
+        //     $paymentschedules->where('subtask_id','=',$request->input('subtask_id'));
+        // }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.

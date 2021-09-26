@@ -82,7 +82,10 @@ class PaymentSchedule extends SnipeModel
         'task_id',
         'subtask_id',
         'contractor_id',
-
+        'amount',
+        'description',
+        'task_name',
+        
         // 'purchaseorder_no',
         // 'file_purchaseorder_no',
         // 'invoice_no',
