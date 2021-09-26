@@ -26,6 +26,7 @@
         <div class="col-md-9">
             <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
                 <select class="form-control" name="priority" style="width: 100%">
+                    <option >  </option>
                     <option value="High" selected>High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>  
@@ -35,16 +36,15 @@
 </div>
 
  <div class="form-group col-xs-12 col-sm-12 col-md-12">
-    <label class="col-md-3 control-label">Select Status:</label>
+    <label class="col-md-3 control-label"> Status:</label>
     <div class="col-md-9">
         <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
             <select class="form-control" name="statustask_id" style="width: 100%">
-                <option name="1" value="1">
-                    Completed
-                </option>
-                <option name="4" value="4">
-                    Delay
-                </option>
+                <option >  </option>
+                <option name="1" value="Completed"> Completed </option>
+                <option name="1" value="Ongoing"> Ongoing </option>
+                <option name="1" value="Delayed">Delayed</option>
+                <option name="1" value="Upcoming">Upcoming  </option>
             </select>
         </div>
     </div>

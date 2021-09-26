@@ -140,8 +140,6 @@
  <!-- actual start date   -->
 <div class="form-group {{ $errors->has('actual_start_date') ? ' has-error' : '' }}">
     <label for="actual_start_date" class="col-md-3 control-label">{{ trans('general.actual_start_date') }}</label>
-    <div class="col-md-8 col-sm-13">
-        <div class="col-xs-3">
     <div class="input-group col-md-2">
          <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                    <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="actual_start_date" id="actual_start_date" value="{{ old('actual_start_date', ($item->actual_start_date) ? $item->actual_start_date->format('Y-m-d') : '') }}" onchange="findDiffactual();">
@@ -150,8 +148,6 @@
         {!! $errors->first('actual_start_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
     </div>
-
- </div>
  
  <!-- actual end date  -->
  <div class="form-group {{ $errors->has('actual_end_date') ? ' has-error' : '' }}">

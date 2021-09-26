@@ -36,6 +36,7 @@ return array(
     'highpriority'                               => 'High Priority',
     'totaltask'                                 => 'Total Tasks',
 
+    'update'                       => 'Update Project',
     'helpdesk'                     => 'Issues',
     'costing'                      =>'Costing Project',
     'projects'                     => 'Project',

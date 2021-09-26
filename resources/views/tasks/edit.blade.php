@@ -122,9 +122,10 @@
     <div class="col-md-9">
         <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
             <select class="form-control" name="statustask_id" style="width: 100%">
+                <option >  </option>
                 <option name="1" value="Completed"> Completed </option>
                 <option name="1" value="Ongoing"> Ongoing </option>
-                <option name="1" value="Delay">Delay</option>
+                <option name="1" value="Delayed">Delayed</option>
                 <option name="1" value="Upcoming">Upcoming  </option>
             </select>
         </div>

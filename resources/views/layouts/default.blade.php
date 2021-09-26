@@ -133,47 +133,47 @@
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
-                  @can('index', \App\Models\Asset::class)
+                  {{-- @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ url('hardware') }}" tabindex="-1">
                           <i class="fa fa-barcode" aria-hidden="true"></i>
                           <span class="sr-only">Assets</span>
                       </a>
                   </li>
-                  @endcan
-                  @can('view', \App\Models\License::class)
+                  @endcan --}}
+                  {{-- @can('view', \App\Models\License::class)
                   <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ route('licenses.index') }}" tabindex="-1">
                           <i class="fa fa-floppy-o"></i>
                           <span class="sr-only">Licenses</span>
                       </a>
                   </li>
-                  @endcan
+                  @endcan --}}
 
-                  @can('index', \App\Models\Accessory::class)
+                  {{-- @can('index', \App\Models\Accessory::class)
                   <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ route('accessories.index') }}" tabindex="-1">
                           <i class="fa fa-keyboard-o"></i>
                           <span class="sr-only">Accessories</span>
                       </a>
                   </li>
-                  @endcan
-                  @can('index', \App\Models\Consumable::class)
+                  @endcan --}}
+                  {{-- @can('index', \App\Models\Consumable::class)
                   <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('consumables') }}" tabindex="-1">
                           <i class="fa fa-tint"></i>
                           <span class="sr-only">Consumables</span>
                       </a>
                   </li>
-                  @endcan
-                  @can('view', \App\Models\Component::class)
+                  @endcan --}}
+                  {{-- @can('view', \App\Models\Component::class)
                   <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('components.index') }}" tabindex="-1">
                           <i class="fa fa-hdd-o"></i>
                           <span class="sr-only">Components</span>
                       </a>
                   </li>
-                  @endcan
+                  @endcan --}}
 
                   @can('view', \App\Models\Project::class)
                   <li aria-hidden="true"{!! (Request::is('projects*') ? ' class="active"' : '') !!}>
@@ -184,7 +184,7 @@
                   </li>
                   @endcan
 
-                  @can('index', \App\Models\Asset::class)
+                  {{-- @can('index', \App\Models\Asset::class)
                   <li>
                   <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                       <div class="col-xs-12 col-md-12">
@@ -202,7 +202,7 @@
                       </div>
                   </form>
                   </li>
-                  @endcan
+                  @endcan --}}
 
                  
 
@@ -575,14 +575,14 @@
                         </li>
                         @endcan
                        {{-- end add  --}}
-
+{{-- 
                         @can('view', \App\Models\ImplementationPlan::class)
                         <li>
                             <a href="{{ route('implementationplans.index') }}" {{ (Request::is('/implementationplans') ? ' class="active"' : '') }}>
                                 {{ trans('general.implementationplans') }}
                             </a>
                         </li>
-                        @endcan
+                        @endcan --}}
 
                         @can('view', \App\Models\AssetModel::class)
                             <li>
@@ -616,13 +616,13 @@
                             </li>
                         @endcan
 
-                        @can('view', \App\Models\Typeproject::class)
+                        {{-- @can('view', \App\Models\Typeproject::class)
                         <li>
                             <a href="{{ route('typeprojects.index') }}" {{ (Request::is('/typeprojects') ? ' class="active"' : '') }}>
                                 {{ trans('general.typeprojects') }}
                             </a>
                         </li>
-                        @endcan
+                        @endcan --}}
 
                         @can('view', \App\Models\Client::class)
                         <li>
@@ -644,15 +644,15 @@
 
 
                        {{-- new add by farez 21/6/2021 --}}
-                        @can('view', \App\Models\AssignWork::class)
+                        {{-- @can('view', \App\Models\AssignWork::class)
                         <li>
                              <a href="{{ route('assignworks.index') }}" {{ (Request::is('/assignworks') ? ' class="active"' : '') }}>
                              {{ trans('general.assignworks') }}
                           </a>
                          </li>
-                        @endcan
+                        @endcan --}}
                         {{-- end --}}
-                        s
+                        
                         @can('view', \App\Models\Department::class)
                             <li>
                                 <a href="{{ route('departments.index') }}" {{ (Request::is('/departments') ? ' class="active"' : '') }}>

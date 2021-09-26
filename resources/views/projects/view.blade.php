@@ -16,7 +16,7 @@
 
   @can('update', $project)
             <a   type="button" class="btn btn-primary pull-right "  href="{{ route('projects.edit', ['project' => $project->id]) }}">
-               <i class="fa fa-pencil-square" aria-hidden="true"></i>{{ trans('admin/projects/general.edit') }}</a>
+               <i class="fa fa-pencil-square" aria-hidden="true"></i>{{ trans('admin/projects/general.update') }}</a>
           @endcan
 </div>
 @stop
@@ -614,7 +614,7 @@
         @endcan
 
 
-        @can('index', \App\Models\BillQuantity::class)
+        @can('index', \App\Models\Helpdesk::class)
         <div class="tab-pane " id="helpdesk">
           <div class="row">
             <div class="col-md-12">
@@ -631,28 +631,25 @@
               <div class="box">
                 <div class="box-body">
                   <table
-            data-columns="{{ \App\Presenters\HelpdeskPresenter::dataTableLayout() }}"
-            data-cookie-id-table="helpdesksTable"
-            data-pagination="true"
-            data-id-table="helpdesksTable"
-            data-search="true"
-            data-show-footer="true"
-            data-side-pagination="server"
-            data-show-columns="true"
-            data-show-export="true" 
-            data-show-refresh="true"
-            data-sort-order="asc"
-            id="helpdesksTable"
-            class="table table-striped snipe-table"
-            {{-- data-url="{{route('api.helpdesks.index',['project_id' => $project->id], ['deleted' => e(Request::get('deleted')) ]) }}" --}}
-            data-url="{{ route('api.helpdesks.index',['project_id' => $project->id]) }}"
-
-            data-export-options='{
-              "fileName": "export-helpdesks-{{ date('Y-m-d') }}",
-              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-              }'>
-
-          </table>
+                  data-columns="{{ \App\Presenters\HelpdeskPresenter::dataTableLayout() }}"
+                  data-cookie-id-table="helpdeskTable"
+                  data-pagination="true"
+                  data-search="true"
+                  data-side-pagination="server"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-footer="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  data-sort-name="name"
+                  id="helpdeskTable"
+                  class="table table-striped snipe-table"
+                  data-url="{{ route('api.helpdesks.index',['project_id' => $project->id]) }}"
+                  data-export-options='{
+                "fileName": "export-projects-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","icon"]
+                }'>
+            </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
                 </div>

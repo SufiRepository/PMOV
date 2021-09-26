@@ -15,14 +15,14 @@ class ProjectPresenter extends Presenter
     public static function dataTableLayout()
     {
         $layout = [
-            [
-                "field" => "id",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.id'),
-                "visible" => true
-            ], 
+            // [
+            //     "field" => "id",
+            //     "searchable" => false,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('general.id'),
+            //     "visible" => true
+            // ], 
             [
                 "field" => "name",
                 "searchable" => true,
@@ -42,15 +42,15 @@ class ProjectPresenter extends Presenter
                 "switchable" => true,
                 "formatter" => ""
             ],
-            [
-                "field" => "start_date",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "switchable" => true,
-                "title" => trans('admin/projects/table.start_date'),
-                'formatter' => 'dateDisplayFormatter'
-            ], 
+            // [
+            //     "field" => "start_date",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "visible" => false,
+            //     "switchable" => true,
+            //     "title" => trans('admin/projects/table.start_date'),
+            //     'formatter' => 'dateDisplayFormatter'
+            // ], 
 
              [
                 "field" => "end_date",
@@ -72,43 +72,43 @@ class ProjectPresenter extends Presenter
                 "footerFormatter" => 'sumFormatter',
             ], 
 
-            [
-                "field" => "duration",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('Duration'),
-                "footerFormatter" => 'sumDurationFormatter',            
+            // [
+            //     "field" => "duration",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "visible" => false,
+            //     "title" => trans('Duration'),
+            //     "footerFormatter" => 'sumDurationFormatter',            
             
-            ],
+            // ],
 
-             [
-                "field" => "details",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('general.details'),
-                "formatter" => "notesFormatter"
-             ],
+            //  [
+            //     "field" => "details",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "visible" => false,
+            //     "title" => trans('general.details'),
+            //     "formatter" => "notesFormatter"
+            //  ],
 
-            [
-                "field" => "company",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/companies/table.title'),
-                "visible" => false,
-                "formatter" => "companiesLinkObjFormatter"
-            ], 
-            [
-                "field" => "typeproject",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/companies/table.typeproject'),
-                "visible" => false,
-                "formatter" => "typeprojectsLinkObjFormatter"
-            ], 
+            // [
+            //     "field" => "company",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('admin/companies/table.title'),
+            //     "visible" => false,
+            //     "formatter" => "companiesLinkObjFormatter"
+            // ], 
+            // [
+            //     "field" => "typeproject",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('admin/companies/table.typeproject'),
+            //     "visible" => false,
+            //     "formatter" => "typeprojectsLinkObjFormatter"
+            // ], 
             [
                 "field" => "client",
                 "searchable" => true,
@@ -119,24 +119,24 @@ class ProjectPresenter extends Presenter
             ],
 
 
-              [
-                "field" => "user",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.admin'),
-                "visible" => false,
-                "formatter" => "usersLinkObjFormatter"
-            ],
+            //   [
+            //     "field" => "user",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "switchable" => true,
+            //     "title" => trans('general.admin'),
+            //     "visible" => false,
+            //     "formatter" => "usersLinkObjFormatter"
+            // ],
 
-            [
-                "field" => "location",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('admin/hardware/table.location'),
-                "formatter" => "deployedLocationFormatter"
-            ],
+            // [
+            //     "field" => "location",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "visible" => false,
+            //     "title" => trans('admin/hardware/table.location'),
+            //     "formatter" => "deployedLocationFormatter"
+            // ],
 
              [
                 "field" => "actions",

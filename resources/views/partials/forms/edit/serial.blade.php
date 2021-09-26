@@ -5,9 +5,9 @@
         <input class="form-control" id="generateidtxt" type="text" name="{{ $fieldname }}"  value="{{ old('serial', $item->serial) }}" />
         {!! $errors->first('serial', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
-    <div class="col-md-1 col-sm-2 text-left">
+    {{-- <div class="col-md-1 col-sm-2 text-left">
         <button type="button"  id="generateID" class="btn btn-primary">Generate</button>
-    </div>
+    </div> --}}
 </div>
 
 <script>

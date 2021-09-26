@@ -55,26 +55,26 @@
   </div><!-- ./col -->
 
   {{-- task --}}
-  <div class="col-lg-2 col-xs-3 ">
+  {{-- <div class="col-lg-2 col-xs-3 "> --}}
     <!-- small box -->
-    @can('index', \App\Models\Task::class)
-        <a href="{{ route('tasks.index') }}">
-      <div class="small-box bg-orange">
-        <div class="inner">
-          <h3> {{ number_format($counts['task']) }}</h3>
+    {{-- @can('index', \App\Models\Task::class) --}}
+        {{-- <a href="{{ route('tasks.index') }}"> --}}
+      {{-- <div class="small-box bg-orange"> --}}
+        {{-- <div class="inner"> --}}
+          {{-- <h3> {{ number_format($counts['task']) }}</h3> --}}
           {{-- <h3> 0 </h3> --}}
-            <p>{{ trans('general.tasks') }}</p>
-        </div>
-        <div class="icon" aria-hidden="true">
-          <i class="fa fa-tachometer" aria-hidden="true"></i>
-        </div>
-        @can('create', \App\Models\Task::class)
-        <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-sm btn-block"> {{ trans('general.new_task') }}
-        </a>
-        @endcan
-      </div>
-    @endcan
-  </div><!-- ./col -->
+            {{-- <p>{{ trans('general.tasks') }}</p> --}}
+        {{-- </div> --}}
+        {{-- <div class="icon" aria-hidden="true"> --}}
+          {{-- <i class="fa fa-tachometer" aria-hidden="true"></i> --}}
+        {{-- </div> --}}
+        {{-- @can('create', \App\Models\Task::class) --}}
+        {{-- <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-sm btn-block"> {{ trans('general.new_task') }} --}}
+        {{-- </a> --}}
+        {{-- @endcan --}}
+      {{-- </div> --}}
+    {{-- @endcan --}}
+  {{-- </div><!-- ./col --> --}}
 
 {{-- staff --}}
   <div class="col-lg-2 col-xs-3" style="float:right;margin:auto;">

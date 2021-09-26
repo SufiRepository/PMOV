@@ -23,22 +23,9 @@
 @endif
 
  
+
  
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/accessories/general.accessory_name')])
-{{-- serial no --}}
-<div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-    <label for="serial" class="col-md-3 control-label">{{ trans('admin/accessories/table.serial_No') }}</label>
-    <div class="col-md-7 col-sm-12">
-        <div class="col-md-12" style="padding-left:0px">
-            <input class="form-control" type="text" name="serial" id="generateidtxt" value="{{ Request::old('serial', $item->serial) }}" />
-        </div>
-        {{-- <div class="col-md-1 col-sm-2 text-left">
-            <button type="button"  id="generateID" class="btn btn-primary">Generate</button>
-        </div> --}}
-        
-    </div>
-    {!! $errors->first('serial', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}
-</div>
 
 {{-- model no --}}
 <div class="form-group {{ $errors->has('model_number') ? ' has-error' : '' }}">
@@ -54,6 +41,23 @@
     </div>
     {!! $errors->first('model_number', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}
 </div>
+
+{{-- serial no --}}
+<div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
+    <label for="serial" class="col-md-3 control-label">{{ trans('admin/accessories/table.serial_No') }}</label>
+    <div class="col-md-7 col-sm-12">
+        <div class="col-md-12" style="padding-left:0px">
+            <input class="form-control" type="text" name="serial" id="generateidtxt" value="{{ Request::old('serial', $item->serial) }}" />
+        </div>
+        {{-- <div class="col-md-1 col-sm-2 text-left">
+            <button type="button"  id="generateID" class="btn btn-primary">Generate</button>
+        </div> --}}
+        
+    </div>
+    {!! $errors->first('serial', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}
+</div>
+
+
 
 
 {{-- add by farez  17/5 --}}
