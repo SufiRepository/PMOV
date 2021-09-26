@@ -38,6 +38,8 @@ class Consumable extends SnipeModel
     public $rules = array(
         'name'        => 'required|min:3|max:255',
         'qty'         => 'required|integer|min:0',
+        'model_number'         => 'required|min:1',
+
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
         'project_id'  => 'integer|nullable',

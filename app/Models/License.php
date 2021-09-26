@@ -49,7 +49,7 @@ class License extends Depreciable
 
     protected $rules = array(
         'name'   => 'required|string|min:3|max:255',
-        'seats'   => 'nullable',
+        'seats'   => 'required|nullable',
         'license_email'   => 'email|nullable|max:120',
         'license_name'   => 'string|nullable|max:100',
         'notes'   => 'string|nullable',

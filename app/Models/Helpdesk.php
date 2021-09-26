@@ -44,7 +44,7 @@ class Helpdesk extends SnipeModel
         'name',
         'issue',
         'location_id',
-        // 'project_id',
+        'project_id',
         'description',
         
     ];
