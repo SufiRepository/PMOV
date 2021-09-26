@@ -672,7 +672,7 @@
         if (Array.isArray(data)) {
             var field = this.field;
             var total_sum = data.reduce(function(sum, row) {
-                return (sum) + (parseFloat(row[field]) || 0);
+                return (parseFloat(sum))+ (parseFloat(row[field]) || 0);
             }, 0);
             return numberWithCommas(total_sum.toFixed(2));
         }

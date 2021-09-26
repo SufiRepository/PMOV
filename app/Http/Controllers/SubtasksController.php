@@ -98,7 +98,7 @@ class SubtasksController extends Controller
         $subtask->statustask_id             = $request ->input('statustask_id');
         $subtask->contractor_id             = $request->input('contractor_id');        
         $subtask->supplier_id               = $request->input('supplier_id');        
-        $subtask->amount_task               = $request->input('value_task');    
+        $subtask->amount_task               = Helper::ParseFloat($request->get('value_task'));    
         $subtask->payment_schedule_date     = $request->input('payment_month');        
         $subtask->billingOrpayment          = $request->input('billingOrpayment');   
         $subtask->name                      = $request->input('name');
@@ -183,7 +183,8 @@ class SubtasksController extends Controller
         $subtask->details                   = $request->input('details');
         $subtask->status_id                 = $request ->input('status_id');
         $subtask->contractor_id             = $request->input('contractor_id');    
-        $subtask->supplier_id               = $request->input('supplier_id');        
+        $subtask->supplier_id               = $request->input('supplier_id');     
+        $subtask->amount_task               = Helper::ParseFloat($request->get('value_task'));       
         $subtask->contract_start_date       = $request->input('contract_start_date');
         $subtask->contract_end_date         = $request->input('contract_end_date');
         $subtask->actual_start_date         = $request->input('actual_start_date');
