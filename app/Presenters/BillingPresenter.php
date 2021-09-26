@@ -54,11 +54,11 @@ class BillingPresenter extends Presenter
                 "footerFormatter" => 'sumFormatter',
             ], 
             [
-                "field" => "descriptions",
+                "field" => "description",
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('Descriptions'),
+                "title" => trans('Description'),
                 "formatter" => "notesFormatter"
             ],
             // [

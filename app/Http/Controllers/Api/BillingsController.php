@@ -51,9 +51,9 @@ class BillingsController extends Controller
             $billings = $billings->TextSearch($request->input('search'));
         }
 
-        if ($request->filled('project_id')) {
-            $billings->where('project_id','=',$request->input('project_id'));
-        }
+        // if ($request->filled('project_id')) {
+        //     $billings->where('project_id','=',$request->input('project_id'));
+        // }
         // if ($request->filled('task_id')) {
         //     $billings->where('task_id','=',$request->input('task_id'));
         // }

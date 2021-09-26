@@ -28,7 +28,9 @@ class BillingsTransformer
             'id'   => (int)$billing->id,
             'task_name' => e($billing->task_name),
             'amount' => e($billing->amount),
-            'billingdate'          => Helper::getFormattedDateObject($billing->billingdate, 'datetime'),
+            'billingdate' => e($billing->billingdate),
+
+            // 'billingdate'          => Helper::getFormattedDateObject($billing->billingdate, 'datetime'),
             'description' => e($billing->description),
 
         ];
