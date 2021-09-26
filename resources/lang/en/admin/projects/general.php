@@ -22,7 +22,7 @@ return array(
     'implemntationplan'                      => 'Implemntation Plan',
     'team'                                   => 'Team',
     'project_members'                        => 'Project Members',
-
+ 'issue' => 'Issues',
     'bq'                                     => "Bill Of Quantities",
     'uploadfile'                             => 'Upload Files',
     'assets'                                 => 'Assets',
@@ -34,7 +34,7 @@ return array(
     'completedtask'                             => 'Task Completed ',
     'delaytask'                                 => 'Task Delayed',
     'highpriority'                               => 'High Priority',
-    'totaltask'                                 => 'Total Task',
+    'totaltask'                                 => 'Total Tasks',
 
     'helpdesk'                     => 'Issues',
     'costing'                      =>'Costing Project',
