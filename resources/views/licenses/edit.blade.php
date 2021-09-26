@@ -42,9 +42,9 @@
 <!-- Seats -->
 <div class="form-group {{ $errors->has('seats') ? ' has-error' : '' }}">
     <label for="seats" class="col-md-3 control-label">{{ trans('admin/licenses/form.seats') }}</label>
-    <div class="col-md-7 col-sm-12">
+    <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'seats')) ? ' required' : '' }} ">
         <div class="col-md-2" style="padding-left:0px">
-            <input class="form-control" type="text" name="seats" id="seats" value="{{ Request::old('seats', $item->seats) }}" />
+            <input class="form-control" type="text" name="seats" id="seats" value="{{ Request::old('seats', $item->seats) }}"{!!  (\App\Helpers\Helper::checkIfRequired($item, 'seats')) ? ' data-validation="required" required' : '' !!} />
         </div>
     </div>
     {!! $errors->first('seats', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}

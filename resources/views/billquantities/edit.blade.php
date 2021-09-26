@@ -17,10 +17,9 @@
 
 <!-- type  -->
 <div class="form-group {{ $errors->has('type') ? ' has-error' : '' }}">
-    <label for="type" class="col-md-3 control-label"></label>
+    <label for="type" class="col-md-3 control-label">{{ trans('admin/billquantities/table.type') }}</label>
     <div class="col-md-9">
-        <div class="input-group col-md-7" style="padding-left: 0px;">
-
+        <div class="input-group col-md-7" >
             <input type="radio" id="contract" name="option" value="Contract">
               <label for="contract">Contract</label>
               <input type="radio" id="non_contract" name="option" value="Non Contract">
@@ -33,21 +32,30 @@
     </div>
 </div>    
 
-@include ('partials.forms.edit.name', ['translated_name' => trans('admin/billquantities/table.description')])
 
 <!-- type  -->
 <div class="form-group {{ $errors->has('type') ? ' has-error' : '' }}">
-    <label for="type" class="col-md-3 control-label">{{ trans('') }}</label>
-    <div class="col-md-9">
-        <div class="input-group col-md-4" style="padding-left: 0px;">
-            <input type="radio" id="contract" name="type" value="Services">
+    <label for="type" class="col-md-3 control-label">{{ trans('admin/billquantities/table.categories') }}</label>
+
+    <div class="col-md-8">
+        {{-- <label for="modelNo" class="col-md-3 control-label">{{ trans('admin/billquantities/table.type') }}</label> --}}
+        <div class="input-group col-md-12" >
+              <input type="radio" id="contract" name="type" value="Services">
               <label for="Services">Services </label>
+
+              <input type="radio" id="software" name="type" value="Software">
+              <label for="Software">Software</label>
+
+
+              <input type="radio" id="Training" name="type" value="Training">
+              <label for="Training">Training</label>   
 
               <input type="radio" id="Equiment" name="type" value="Equiment">
               <label for="Equiment">Equiment</label>        
 
-              <input type="radio" id="software" name="type" value="Software">
-              <label for="Software">Software</label><br>         
+            
+
+                     
         </div>
         <div class="col-md-9" style="padding-left: 0px;">
             {!! $errors->first('type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -59,12 +67,32 @@
 @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 @endif
 
+<!-- Brand  -->
+<div class="form-group {{ $errors->has('brand') ? ' has-error' : '' }}">
+    <label for="modelNo" class="col-md-3 control-label">{{ trans('admin/billquantities/table.brand') }}</label>
+    <div class="col-md-7 col-sm-12">
+        <div class="col-md-12" style="padding-left:0px">
+            <input class="form-control" type="text" name="brand" id="generateidtxt" value="{{ Request::old('brand', $item->brand) }}" />
+        </div>
+        <div class="col-md-1 col-sm-2 text-left">
+
+            {{-- <button type="button"  id="generateID" class="btn btn-primary">Generate</button> --}}
+
+            {{-- <button id="generateID">Generate </button> --}}
+        </div>
+        
+    </div>
+    {!! $errors->first('serial', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}
+</div>
+
+
+
 <!-- model no -->
 <div class="form-group {{ $errors->has('modelNo') ? ' has-error' : '' }}">
     <label for="modelNo" class="col-md-3 control-label">{{ trans('admin/billquantities/table.modelNo.') }}</label>
     <div class="col-md-7 col-sm-12">
-        <div class="col-md-7" style="padding-left:0px">
-            <input class="form-control" type="text" name="modelNo" id="generateidtxt" value="{{ Request::old('modelNo', $item->modelNo) }}" />
+        <div class="col-md-12 {{  (\App\Helpers\Helper::checkIfRequired($item, 'modelNo')) ? ' required' : '' }} "  style="padding-left:0px">
+            <input class="form-control" type="text" name="modelNo" id="generateidtxt" value="{{ Request::old('modelNo', $item->modelNo) }}" {!!  (\App\Helpers\Helper::checkIfRequired($item, 'modelNo')) ? ' data-validation="required" required' : '' !!} />
         </div>
         <div class="col-md-1 col-sm-2 text-left">
 
@@ -81,7 +109,7 @@
 <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
     <label for="serial" class="col-md-3 control-label">{{ trans('admin/accessories/table.serial_No') }}</label>
     <div class="col-md-7 col-sm-12">
-        <div class="col-md-7" style="padding-left:0px">
+        <div class="col-md-12" style="padding-left:0px">
             <input class="form-control" type="text" name="serial" id="generateidtxt" value="{{ Request::old('serial', $item->serial) }}" />
         </div>
         <div class="col-md-1 col-sm-2 text-left">
@@ -95,6 +123,27 @@
     {!! $errors->first('serial', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}
 </div>
  
+<!-- Descriptopn  -->
+<div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
+    <label for="serial" class="col-md-3 control-label">{{ trans('admin/billquantities/table.description') }}</label>
+    <div class="col-md-7 col-sm-12">
+        <div class="col-md-12" style="padding-left:0px">
+            <input class="form-control" type="text" name="name" id="generateidtxt" value="{{ Request::old('name', $item->name) }}" />
+        </div>
+        <div class="col-md-1 col-sm-2 text-left">
+
+            {{-- <button type="button"  id="generateID" class="btn btn-primary">Generate</button> --}}
+
+            {{-- <button id="generateID">Generate </button> --}}
+        </div>
+        
+    </div>
+    {!! $errors->first('serial', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}
+</div>
+
+{{-- @include ('partials.forms.edit.name', ['translated_name' => trans('admin/billquantities/table.description')]) --}}
+
+
 {{-- <p>Enter First Number :</p>
 <br>
 <input type="text" id="Text1"  oninput="add_number()">
@@ -179,42 +228,27 @@
 {{-- @include ('partials.forms.edit.sale_value') --}}
 
 {{-- @include ('partials.forms.edit.buy_value') --}}
- <!-- Image -->
- @if ($item->image)
- <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-     <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-     <div class="col-md-5">
-         <label class="control-label" for="image_delete">
-         <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Request::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
-         {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-         </label>
-         <div style="margin-top: 0.5em">
-             <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($item->image)) }}" class="img-responsive" />
-         </div>
-     </div>
- </div>
- @endif
-
- <div class="form-group {{ $errors->has((isset($fieldname) ? $fieldname : 'image')) ? 'has-error' : '' }}">
-    <label class="col-md-3 control-label" for="image">{{ trans('general.upload') }}</label>
-    <div class="col-md-9">
-
-        <input type="file" id="image" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" aria-label="image" class="sr-only">
-
-        <label class="btn btn-default" aria-hidden="true">
-            {{ trans('button.select_file')  }}
-            <input type="file" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="js-uploadFile" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/webp,image/png,image/svg" style="display:none; max-width: 90%" aria-label="image" aria-hidden="true">
-        </label>
-        <span class='label label-default' id="uploadFile-info"></span>
-
-        <p class="help-block" id="uploadFile-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
-        {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-    </div>
-    <div class="col-md-4 col-md-offset-3" aria-hidden="true">
-        <img id="uploadFile-imagePreview" style="max-width: 200px; display: none;" alt="Uploaded image thumbnail">
+ 
+<!-- filename -->
+<div class="form-group {{ $errors->has('filename') ? ' has-error' : '' }}">
+    <label for="filename" class="col-md-3 control-label">Filename</label>
+    <div class="col-md-7 col-sm-12">
+        {{-- <div class="col-xs-3"> --}}
+    <input class="form-control" type="text" name="filename" aria-label="filename" id="filename" value="{{ old('filename', $item->filename) }}"/>
+  </div>
+  {!! $errors->first('filename', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 
+<div class="form-group {{ $errors->has('files') ? ' has-error' : '' }}">
+    <label for="files" class="col-md-3 control-label">Select Files</label>
+    <div class="col-md-7 col-sm-12">
+        <input type="file" name="file" class="custom-file-input" id="chooseFile">    
+        <p >only csv,txt,xlx,xls,pdf type file, and 5Mb</p>
+
+    </div>
+
+</div>
 
 
 

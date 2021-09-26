@@ -2,6 +2,8 @@
     'createText' => trans('admin/projects/form.create'),
     'updateText' => trans('admin/projects/form.update'),
     'topSubmit' => true,
+    'helpPosition'  => 'right',
+    'helpText' => trans('admin/projects/table.help'),
     'formAction' => ($item->id) ? route('projects.update', ['project' => $item->id]) : route('projects.store'),
 ])
 
@@ -78,16 +80,38 @@ Number of days: <input type="text" name="days" id="days" />
 
      --}}
 
-<!-- start date  -->
+     <div class="form-group {{ $errors->has('gps') ? ' has-error' : '' }}">
+        <label for="gps" class="col-md-3 control-label"> {{ trans('general.start_date') }}</label>
+        <div class="col-md-8 col-sm-13">
+            <div class="col-xs-3">
+                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true"   >
+                              <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="dob1" value="{{ old('start_date', ($item->start_date) ? $item->start_date->format('Y-m-d') : '') }}" required onchange="findDiff();">
+                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                   </div>
+                   {!! $errors->first('start_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            </div>
+
+
+      <div class="col-xs-5">
+        <label for="due_date" class="col-md-6 control-label">{{ trans('general.end_date') }}</label>
+
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true" >
+            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}"  name="end_date" id="dob2" value="{{ old('end_date', ($item->end_date) ? $item->end_date->format('Y-m-d') : '') }}" required onchange="findDiff();">
+                <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+        </div>
+    {!! $errors->first('due_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}    
+            </div>
+        </div>
+    </div>
+
+    
+
+{{-- <!-- start date  -->
 <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
     <label for="start_date" class="col-md-3 control-label">{{ trans('general.start_date') }}</label>
     <div class="input-group col-md-3">
          <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true"   >
-              {{-- <div>  --}}
                    <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="dob1" value="{{ old('start_date', ($item->start_date) ? $item->start_date->format('Y-m-d') : '') }}" required onchange="findDiff();">
-         
-         {{-- <input  type="date"  name="dob1" id="dob1" /> --}}
-
              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
         {!! $errors->first('start_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -100,19 +124,14 @@ Number of days: <input type="text" name="days" id="days" />
 <div class="form-group {{ $errors->has('due_date') ? ' has-error' : '' }}">
     <label for="due_date" class="col-md-3 control-label">{{ trans('general.end_date') }}</label>
     <div class="input-group col-md-3">
-        {{-- <div>   --}}
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true" >
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}"  name="end_date" id="dob2" value="{{ old('end_date', ($item->end_date) ? $item->end_date->format('Y-m-d') : '') }}" required onchange="findDiff();">
-             {{-- Enter Date2(yyyy-mm-dd): <input  type="date"  onkeypress="return CheckNumeric()" onkeyup="findDiff(this)" type="text" name="dob2" id="dob2" /> --}}            
                     <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
             </div>
-        {{-- <br> --}}
-        {{-- <div> 
-            <button type="button"  onchange="findDiff();" class="btn btn-warning">Comfirm The Date</button>
-        </div> --}}
+      
         {!! $errors->first('due_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
- </div>
+ </div> --}}
  
 <!-- duration date  -->
 

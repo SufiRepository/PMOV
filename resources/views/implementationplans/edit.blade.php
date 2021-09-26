@@ -2,7 +2,9 @@
     'createText' => trans('Create Project Plan') ,
     'updateText' => trans('Update Project Plan '),
     'helpPosition'  => 'right',
-    'helpText' => trans('help.implementationplans'),
+    'topSubmit' => true,
+
+    'helpText' => trans('admin/implementationplans/table.help'),
     'formAction' => (isset($item->id)) ? route('implementationplans.update', ['implementationplan' => $item->id]) : route('implementationplans.store'),
     // 'formAction' => ($item->id) ? route('implementationplans.update', ['implementationplan' => $item->id]) : route('implementationplans.store'),
 
@@ -134,22 +136,27 @@
     {!! $errors->first('contract_duration', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}
 </div> --}}
 
+
  <!-- actual start date   -->
 <div class="form-group {{ $errors->has('actual_start_date') ? ' has-error' : '' }}">
     <label for="actual_start_date" class="col-md-3 control-label">{{ trans('general.actual_start_date') }}</label>
-    <div class="input-group col-md-3">
+    <div class="col-md-8 col-sm-13">
+        <div class="col-xs-3">
+    <div class="input-group col-md-2">
          <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                    <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="actual_start_date" id="actual_start_date" value="{{ old('actual_start_date', ($item->actual_start_date) ? $item->actual_start_date->format('Y-m-d') : '') }}" onchange="findDiffactual();">
              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
         </div>
         {!! $errors->first('actual_start_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
+    </div>
+
  </div>
  
  <!-- actual end date  -->
  <div class="form-group {{ $errors->has('actual_end_date') ? ' has-error' : '' }}">
     <label for="actual_end_date" class="col-md-3 control-label">{{ trans('general.actual_end_date') }}</label>
-        <div class="input-group col-md-3">
+        <div class="input-group col-md-2">
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}"  name="actual_end_date" id="actual_end_date" value="{{ old('actual_end_date', ($item->actual_end_date) ? $item->actual_end_date->format('Y-m-d') : '') }}" onchange="findDiffactual();">
                     <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>

@@ -4,7 +4,7 @@
 @section('title')
 
 {{-- {{ trans('admin/subtasks/general.view') }} --}}
-{{$subtask->name}}
+{{-- {{$subtask->name}} --}}
 
 
 @parent
@@ -103,6 +103,17 @@
       <div class="panel-body">
 
 
+        @if (!is_null($subtask->statustask_id) )
+        <div class="row">
+          <div class="col-md-4">
+            <strong>{{ trans('general.statustask') }}</strong>
+          </div>
+          <div class="col-md-8">
+            {{ $subtask->statustask_id }}
+          </div>
+        </div>
+        @endif
+
         @if (!is_null($subtask->priority))
       <div class="row">
         <div class="col-md-4">
@@ -114,7 +125,7 @@
       </div>
     @endif
 
-    @if (!is_null($subtask->statustask) && ($subtask->statustask->id == 3))
+    {{-- @if (!is_null($subtask->statustask) && ($subtask->statustask->id == 3))
             <div class="row">
               <div class="col-md-4">
                 <strong>{{ trans('general.statustask') }}</strong>
@@ -150,9 +161,9 @@
           
         </div>
       </div>
-    @endif
+    @endif --}}
 
-    @if (!is_null($subtask->statustask) && ($subtask->statustask->id == 5))
+    {{-- @if (!is_null($subtask->statustask) && ($subtask->statustask->id == 5))
     <div class="row">
       <div class="col-md-4">
         <strong>{{ trans('general.statustask') }}</strong>
@@ -161,11 +172,11 @@
         {{ $subtask->statustask->name }}
       </div>
     </div>
-  @endif
+  @endif --}}
 
 {{-- end add --}}
 
-    @if (!is_null($subtask->supplier))
+    {{-- @if (!is_null($subtask->supplier))
       <div class="row">
         <div class="col-md-4">
           <strong>{{ trans('general.supplier') }}</strong>
@@ -185,7 +196,7 @@
           <a href="{{ url('/contractors/' . $subtask->contractor->id) }}"> {{ $subtask->contractor->name }} </a>
         </div>
       </div>
-    @endif
+    @endif --}}
 
       @if ($subtask->contract_start_date)
         <div class="row">

@@ -3,7 +3,7 @@
     'createText' => trans('admin/subtasks/form.create_subtask') ,
     'updateText' => trans('admin/subtasks/form.update_subtask'),
     'helpPosition'  => 'right',
-    'helpText' => trans('help.subtasks'),
+    'helpText' => trans('admin/subtasks/form.help'),
     'formAction' => (isset($item->id)) ? route('subtasks.update', ['subtask' => $item->id]) : route('subtasks.store'),
 ])
 {{-- Page content --}}
@@ -41,9 +41,9 @@
             <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
                 <select class="form-control" name="priority" style="width: 100%">
                     <option ></option>
-                    <option value="High" >High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>  
+                    <option value="High" >  High</option>
+                    <option value="Medium"> Medium</option>
+                    <option value="Low">    Low</option>  
                 </select>
             </div>
         </div>
@@ -51,7 +51,7 @@
 
 {{-- @include ('partials.forms.edit.status') --}}
 
-<div class="form-group col-xs-12 col-sm-12 col-md-12">
+{{-- <div class="form-group col-xs-12 col-sm-12 col-md-12">
     <label for="costing" class="col-md-3 control-label">{{trans('admin/subtasks/form.status')}}</label>
     <div class="col-md-9">
         <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
@@ -64,7 +64,21 @@
             </select>
         </div>
     </div>
-</div>
+</div> --}}
+
+<div class="form-group col-xs-12 col-sm-12 col-md-12">
+    <label class="col-md-3 control-label">Status</label>
+    <div class="col-md-9">
+        <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
+            <select class="form-control" name="statustask_id" style="width: 100%">
+                <option name="1" value="Completed"> Completed </option>
+                <option name="1" value="Ongoing">   Ongoing   </option>
+                <option name="1" value="Delayed">   Delayed   </option>
+                <option name="1" value="Upcoming">  Upcoming  </option>
+            </select>
+        </div>
+    </div>
+</div> 
 
 @foreach ($tasks as $task)
 {{-- <div class="form-group {{ $errors->has('files') ? ' has-error' : '' }}"> --}}

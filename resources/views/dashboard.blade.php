@@ -148,16 +148,16 @@
     
               <table
                   data-columns="{{ \App\Presenters\TaskPresenter::dataTableLayout() }}"
-                  data-cookie-id-table="taskTable"
+                  data-cookie-id-table="tasksTable"
                   data-pagination="true"
+                  data-id-table="tasksTable"
                   data-search="true"
                   data-side-pagination="server"
                   data-show-columns="true"
                   data-show-export="true"
-                  data-show-footer="true"
                   data-show-refresh="true"
                   data-sort-order="asc"
-                  data-sort-name="name"
+                  data-toolbar="#toolbar"
                   id="tasksTable"
     
                   class="table table-striped snipe-table"

@@ -19,7 +19,7 @@
 
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
-    <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
+    <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.assetid') }}</label>
 
       <!-- we are editing an existing asset -->
       @if  ($item->id)
@@ -48,7 +48,7 @@
     </div>
 
 
-    @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
+    @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id',])
 
     {{-- test --}}
     {{-- @include ('partials.forms.edit.project-select', ['translated_name' => trans('admin/hardware/form.project'), 'fieldname' => 'project_id', 'field_req' => true]) --}}
@@ -267,7 +267,7 @@
                 x++; //text box increment
 
                 box_html += '<span class="fields_wrapper">';
-                box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
+                box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.assetid') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12 required">';
                 box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" data-validation="required">';
                 box_html += '</div>';
@@ -280,13 +280,6 @@
                 box_html += '<div class="col-md-7 col-sm-12">';
                 box_html += '<input type="text" id="generateidtxt" class="form-control" name="serials[' + x + ']">';
                 box_html += '</div>';
-
-                box_html += '<div class="col-md-1 col-sm-2 text-left">';
-
-                    box_html += '<button type="button"  id="generateID" class="btn btn-primary">Generate</button>';
-
-                box_html += '</div>';
-
                 box_html += '</div>';
                 box_html += '</span>';
                 $(wrapper).append(box_html);

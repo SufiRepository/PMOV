@@ -33,8 +33,10 @@
       {{-- <a href="{{ route('projects.index') }}"> --}}
       <div class="small-box bg-green">
         <div class="inner">
-          <h3> {{ number_format($counts['taskcompleted']) }}</h3>
-          {{-- <h3> 0 </h3> --}}
+          {{-- <h3> {{ number_format($counts['taskcompleted']) }}</h3> --}}
+          {{-- <h3>0</h3> --}}
+
+          <h3> {{$taskcompleted }}</h3>
             <p>{{ trans('admin/projects/general.completedtask') }}</p>
         </div>
         {{-- <div class="icon" aria-hidden="true">
@@ -52,7 +54,9 @@
       {{-- <a href="{{ route('projects.index') }}"> --}}
       <div class="small-box bg-maroon">
         <div class="inner">
-          <h3> {{ number_format($counts['delayed']) }}</h3>
+          {{-- <h3> {{ number_format($counts['delayed']) }}</h3> --}}
+          <h3> {{$taskdelayed}}</h3>
+
           {{-- <h3> 0 </h3> --}}
             <p>{{ trans('admin/projects/general.delaytask') }}</p>
         </div>
@@ -65,15 +69,36 @@
 
 
   {{-- project --}}
-  <div class="col-lg-2 col-xs-3 ">
+  {{-- <div class="col-lg-2 col-xs-3 "> --}}
+    <!-- small box -->
+    {{-- @can('index', \App\Models\Task::class) --}}
+      {{-- <a href="{{ route('projects.index') }}"> --}}
+      {{-- <div class="small-box bg-purple"> --}}
+        {{-- <div class="inner"> --}}
+          {{--  {{ number_format($counts['task']) }} --}}
+          {{-- <h3>{{ $taskpriority}}</h3> --}}
+          {{-- <h3> 0 </h3> --}}
+            {{-- <p>{{ trans('admin/projects/general.highpriority') }}</p> --}}
+        {{-- </div> --}}
+        {{-- <div class="icon" aria-hidden="true">
+          <i class="fa fa-tasks"></i>
+        </div> --}}
+      {{-- </div> --}}
+    {{-- @endcan --}}
+  {{-- </div><!-- ./col --> --}}
+
+   {{-- project --}}
+   <div class="col-lg-2 col-xs-3 ">
     <!-- small box -->
     @can('index', \App\Models\Task::class)
       {{-- <a href="{{ route('projects.index') }}"> --}}
-      <div class="small-box bg-purple">
+      <div class="small-box bg-blue">
         <div class="inner">
-          <h3> {{ number_format($counts['task']) }}</h3>
+          {{-- <h3> {{ number_format($counts['total_task']) }}</h3> --}}
           {{-- <h3> 0 </h3> --}}
-            <p>{{ trans('admin/projects/general.highpriority') }}</p>
+          <h3>{{$tasktotal}}</h3>
+
+            <p>{{ trans('admin/projects/general.totaltask') }}</p>
         </div>
         {{-- <div class="icon" aria-hidden="true">
           <i class="fa fa-tasks"></i>
@@ -87,11 +112,13 @@
     <!-- small box -->
     @can('index', \App\Models\Task::class)
       {{-- <a href="{{ route('projects.index') }}"> --}}
-      <div class="small-box bg-blue">
+      <div class="small-box bg-black">
         <div class="inner">
-          <h3> {{ number_format($counts['total_task']) }}</h3>
-          {{-- <h3> 0 </h3> --}}
-            <p>{{ trans('admin/projects/general.totaltask') }}</p>
+          {{-- <h3> {{ number_format($counts['total_task']) }}</h3> --}}
+          <h3> 0 </h3>
+          {{-- <h3>{{$issuetotal}}</h3> --}}
+
+            <p>{{ trans('admin/projects/general.issue') }}</p>
         </div>
         {{-- <div class="icon" aria-hidden="true">
           <i class="fa fa-tasks"></i>
@@ -100,23 +127,7 @@
     @endcan
   </div><!-- ./col -->
 
-  {{-- project --}}
-  <div class="col-lg-2 col-xs-3 ">
-    <!-- small box -->
-    @can('index', \App\Models\Task::class)
-      {{-- <a href="{{ route('projects.index') }}"> --}}
-      <div class="small-box bg-maroon">
-        <div class="inner">
-          <h3> {{ number_format($counts['delayed']) }}</h3>
-          {{-- <h3> 0 </h3> --}}
-            <p>{{ trans('admin/projects/general.delaytask') }}</p>
-        </div>
-        {{-- <div class="icon" aria-hidden="true">
-          <i class="fa fa-tasks"></i>
-        </div> --}}
-      </div>
-    @endcan
-  </div><!-- ./col -->
+
 
 </div>
 
@@ -129,9 +140,9 @@
         {{-- <li class="active"><a href="#details" data-toggle="tab">Details</a></li>     --}}
 
         @if (is_null($project->implementationplan_id))
-        @can('index', \App\Models\Implementationplan::class)
+        {{-- @can('index', \App\Models\Implementationplan::class) --}}
         <li class="active"><a href="#implementationplans" data-toggle="tab">{{ trans('general.implementationplans') }}</a></li>
-        @endcan
+        {{-- @endcan --}}
         @endif
 
         
@@ -219,7 +230,8 @@
                   data-show-footer="true"
                   data-show-refresh="true"
                   data-sort-order="asc"
-                  data-sort-name="name"
+                  data-sort-name="statustask_id"
+                  data-toolbar="#toolbar"
                   id="TaskTable"
                   class="table table-striped snipe-table"
                   data-url="{{ route('api.tasks.index',['project_id' => $project->id]) }}"
@@ -239,7 +251,7 @@
         @endif
         
         @if (is_null($project->implementationplan_id))
-        @can('index', \App\Models\ImplementationPlan::class)
+        {{-- @can('index', \App\Models\ImplementationPlan::class) --}}
           <div class="tab-pane active" id="tasks">
             <div class="row">
               <div class="col-md-12">                
@@ -263,7 +275,7 @@
             </div> <!--/.row-->
           </div> <!-- /.tab-pane -->
         @endcan
-        @endif
+        {{-- @endif --}}
 
 
        @can('index', \App\Models\Team::class)
@@ -632,7 +644,9 @@
             data-sort-order="asc"
             id="helpdesksTable"
             class="table table-striped snipe-table"
-            data-url="{{route('api.helpdesks.index', ['deleted' => e(Request::get('deleted')) ]) }}"
+            {{-- data-url="{{route('api.helpdesks.index',['project_id' => $project->id], ['deleted' => e(Request::get('deleted')) ]) }}" --}}
+            data-url="{{ route('api.helpdesks.index',['project_id' => $project->id]) }}"
+
             data-export-options='{
               "fileName": "export-helpdesks-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -780,11 +794,11 @@
       
         <div>
           @if (is_null($project->implementationplan_id))
-          @can('create', \App\Models\ImplementationPlan::class)
+          {{-- @can('create', \App\Models\ImplementationPlan::class) --}}
           <a  type="button" class="btn btn-primary btn-sm "   href="{{route('testimplementation', $project->id)}}">
             <i class="fa fa-university" aria-hidden="true"></i>
             {{ trans('admin/projects/general.create_implementationplans') }}</a>
-          @endcan
+          {{-- @endcan --}}
 
           @endif
 
@@ -810,21 +824,22 @@
 
         </div> <br>
         <div>
-          @can('create', \App\Models\License::class)
-          <a type="button" class="btn btn-primary btn-sm " href="{{ route('licenses.create',['id' => $project->id]) }}"> <i class="fa fa-id-card-o" aria-hidden="true"></i>New License</a>
-          @endcan  
-
+         
           @can('create', \App\Models\Accessory::class)
           <a  type="button" class="btn btn-primary btn-sm " href="{{ route('accessories.create',['id' => $project->id]) }}"> <i class="fa fa-keyboard-o" aria-hidden="true"></i>New Accessories</a>
           @endcan  
       
+          @can('create', \App\Models\Consumable::class)
+          <a type="button" class="btn btn-primary btn-sm " href="{{ route('consumables.create',['id' => $project->id]) }}"><i class="fa fa-fax" aria-hidden="true"></i> New Consumable</a>
+        @endcan
+
           </div>  
           <br>  
           <div>
        
-          @can('create', \App\Models\Consumable::class)
-            <a type="button" class="btn btn-primary btn-sm " href="{{ route('consumables.create',['id' => $project->id]) }}"><i class="fa fa-fax" aria-hidden="true"></i> New Consumable</a>
-          @endcan
+            @can('create', \App\Models\License::class)
+            <a type="button" class="btn btn-primary btn-sm " href="{{ route('licenses.create',['id' => $project->id]) }}"> <i class="fa fa-id-card-o" aria-hidden="true"></i>New License</a>
+            @endcan  
 
           @can('create', \App\Models\BillQuantity::class)
           <a href="{{ route('billquantities.create',['id' => $project->id]) }}" class="btn btn-primary btn-sm "> <i class="fa fa-folder-open" aria-hidden="true"></i> New Bill of Material</a>

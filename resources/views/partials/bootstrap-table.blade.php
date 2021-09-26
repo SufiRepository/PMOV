@@ -200,6 +200,14 @@
                 dest = dest + '/' + row.owner_id + '/' + element_name;
             }
 
+            if ((row.available_actions) && (row.available_actions.view === true)) {
+                // return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '"> ' + value + '</a>';
+
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + value +'" class="btn btn-sm btn-primary" data-tooltip="true" title="View"><i class="fa fa-window-restore" aria-hidden="true"></i><span class="sr-only">View</span></a>&nbsp;';
+                // actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/view " class="btn btn-sm btn-primary" data-tooltip="true" title="View"><i class="fa fa-window-restore" aria-hidden="true"></i><span class="sr-only">View</span></a>&nbsp;';
+
+            }
+
             if ((row.available_actions) && (row.available_actions.clone === true)) {
                 actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
@@ -516,23 +524,25 @@
     }
 
     function projectdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/project-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
+            return '<a href="{{ url('/') }}/project-file-download/?file=' + row.filename + '">Download</a>';
     }
 
     function implementationdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/implementation-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
+            return '<a href="{{ url('/') }}/implementation-file-download/?file=' + row.filename + '">Download</a>';
     }
 
+    
+
     function taskdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/task-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
+            return '<a href="{{ url('/') }}/task-file-download/?file=' + row.filename + '">Download</a>';
     }
 
     function subtaskdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/subtask-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
+            return '<a href="{{ url('/') }}/subtask-file-download/?file=' + row.filename + '">Download</a>';
     }
     // bahagian po do sd
     function purchaseodertaskdownloadLinkFormatter(value, row) {
-            return '<a href="{{ url('/') }}/purchaseodertask-file-download/?file=' + row.filename + '"><i class="fa fa-download" aria-hidden="true"></i><span class="sr-only">Download</span></a>';
+            return '<a href="{{ url('/') }}/purchaseodertask-file-download/?file=' + row.filename + '">Download</a>';
     }
 
     function trueFalseFormatter(value) {
