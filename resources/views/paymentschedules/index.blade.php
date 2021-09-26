@@ -28,7 +28,9 @@
       <div class="inner">
         <p>Total Payment <br> RM {{$totalpayment}}</p>
       </div>
-      <a href="{{ route('viewpayment',['id'=> $projects]) }}" class="btn btn-danger btn-sm btn-block"> View Payment</a>
+      {{-- <a href="{{ route('viewpayment',['id'=> $projects]) }}" class="btn btn-danger btn-sm btn-block"> View Payment</a> --}}
+      <a href="{{ route('createpayment',['id'=> $projects]) }}" class="btn btn-danger btn-sm btn-block"> New Payment</a>
+
     </div>
   </div><!-- ./col -->
 
@@ -40,26 +42,41 @@
       <div class="inner">
         <p>Total Billing <br> RM {{$totalbilling}}</p>
       </div>
-      <a href="{{ route('viewbilling',['id'=> $projects]) }}" class="btn btn-danger btn-sm btn-block"> View Billing</a>
+      {{-- <a href="{{ route('viewbilling',['id'=> $projects]) }}" class="btn btn-danger btn-sm btn-block"> View Billing</a> --}}
+      <a href="{{ route('createbilling',['id'=> $projects]) }}" class="btn btn-danger btn-sm btn-block"> New  Billing</a>
+
     </div>
   </div><!-- ./col end -->
+
+  
+      {{-- <div class="panel-heading">
+        <h3 class="panel-title"> Action </h3>
+      </div>
+      <div class="panel-body">
+      
+          <a href="{{ route('createbilling',['id'=> $projects]) }}" class="btn btn-danger btn-sm "> New  Billing</a>
+
+          <a href="{{ route('createpayment',['id'=> $projects]) }}" class="btn btn-danger btn-sm "> New Payment</a>
+
+      </div>
+     --}}
 
  
 </div>
 
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-12">
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#subtasks" data-toggle="tab">{{ trans('admin/subtasks/form.subtasks') }}</a></li>
-        <li><a href="#payment" data-toggle="tab">Payment</a></li>
+        {{-- <li class="active"><a href="#subtasks" data-toggle="tab">{{ trans('admin/subtasks/form.subtasks') }}</a></li> --}}
+        <li class="active"><a href="#payment" data-toggle="tab">Payment</a></li>
         <li><a href="#billings" data-toggle="tab">Billing</a></li>
       </ul>
     
       <div class="tab-content">
     
-        <div class="tab-pane active" id="subtasks">
+        {{-- <div class="tab-pane active" id="subtasks">
           <div class="row">
             <div class="col-md-12">
          
@@ -98,16 +115,16 @@
             </div>
     
           </div> <!--/.row-->
-        </div> <!-- /.tab-pane -->
+        </div> <!-- /.tab-pane --> --}}
     
     
     
-        <div class="tab-pane" id="payment">
+        <div class="tab-pane active" id="payment">
           <div class="row">
             <div class="col-md-12">
                 <div class="box-header with-border">
                   <div class="box-heading">
-                    <h2 class="box-title"> {{ trans('general.listoffiles') }}</h2>
+                    {{-- <h2 class="box-title"> {{ trans('general.listoffiles') }}</h2> --}}
                   </div>
                 </div><!-- /.box-header -->    
                 <div class="box">
@@ -189,7 +206,7 @@
 
   <div class="col-md-3">
 
-    <div class="panel panel-default">
+    {{-- <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"> Action </h3>
       </div>
@@ -200,7 +217,7 @@
           <a href="{{ route('createpayment',['id'=> $projects]) }}" class="btn btn-danger btn-sm "> New Payment</a>
 
       </div>
-    </div>
+    </div> --}}
 
   </div>
 </div>

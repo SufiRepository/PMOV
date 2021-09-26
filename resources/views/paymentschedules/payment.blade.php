@@ -92,9 +92,9 @@ Make Payment
                             <label class="col-md-3 control-label">Task:</label>
                             <div class="col-md-9">
                                 <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
-                                    <select class="form-control" name="task_id" style="width: 100%">
+                                    <select class="form-control" name="task_name" style="width: 100%">
                                         @foreach ($tasks as $task)
-                                            <option name="task_id" value="{{ $task->id }}"> 
+                                            <option name="task_name" value="{{ $task->name }}"> 
                                                 {{ $task->name }} 
                                             </option>
                                         @endforeach    

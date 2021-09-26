@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Make a new Billing
+New Billing
 @parent
 @stop
 
@@ -64,7 +64,7 @@ Make a new Billing
                      <div class="row">
 
                         {{-- project id  --}}
-                        <input type="hidden" name="project_id" value="{{ $project->id }}">
+                        <input type="hidden" name="project_id" value="{{ $projectid }}">
 
                         {{-- Client name / Project Owner --}}
                         <div class="form-group col-xs-12 col-sm-12 col-md-12">
@@ -92,9 +92,9 @@ Make a new Billing
                             <label class="col-md-3 control-label">Task:</label>
                             <div class="col-md-9">
                                 <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
-                                    <select class="form-control" name="task_id" style="width: 100%">
+                                    <select class="form-control" name="task_name" style="width: 100%">
                                         @foreach ($tasks as $task)
-                                            <option name="task_id" value="{{ $task->id }}"> 
+                                            <option name="task_name" value="{{ $task->name }}"> 
                                                 {{ $task->name }} 
                                             </option>
                                         @endforeach    

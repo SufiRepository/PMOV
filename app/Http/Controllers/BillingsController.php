@@ -110,11 +110,11 @@ class BillingsController extends Controller
         // $this->authorize('create', Billing::class);
         // return view('billings/edit')
         //     ->with('item', new Billing);
-        $taskid            = $id;
+        $projectid            = $id;
         $task          = DB::table('tasks')
                         ->where('id','=',$taskid)
                         ->first();
-        $projectid         = $task->project_id;
+        // $projectid         = $task->project_id;
 
         $project = DB::table('projects')
                     ->where('projects.id','=',$projectid )
@@ -160,6 +160,7 @@ class BillingsController extends Controller
  
         $billing->project_id            = $request->input('project_id');
         $billing->task_id               = $request->input('task_id');
+        $billing->task_name               = $request->input('task_name');
 
         $billing->billingdate          = $request->input('paymentdate');
         $billing->amount               = $request->input('amount');

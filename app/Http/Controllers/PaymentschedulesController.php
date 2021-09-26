@@ -253,6 +253,7 @@ class PaymentSchedulesController extends Controller
                         ->get();
 
         return view('paymentschedules.createbilling')
+                ->with(compact('projectid'))
                 ->with(compact('project'))
                 ->with(compact('tasks'))
                 ->with(compact('contractors'))
@@ -266,6 +267,8 @@ class PaymentSchedulesController extends Controller
  
         $paymentschedule->project_id            = $request->input('project_id');
         $paymentschedule->task_id            = $request->input('task_id');
+        $paymentschedule->task_name           = $request->input('task_name');
+
         $paymentschedule->contractor_id         = $request->input('contractor_id');
     
         // $paymentschedule->paymentstatus      = $request->input('pending');
