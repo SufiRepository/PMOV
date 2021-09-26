@@ -15,7 +15,8 @@ class BillQuantity extends SnipeModel
     protected $table = 'billquantities';
 
     protected $rules = array(
-        'name'                     => 'required|min:1|max:255|unique_undeleted',
+        // 'name'                     => 'required|min:1|max:255|unique_undeleted',
+        'modelNo'                  => 'required',
         'company_id'               => 'integer|nullable',
         'user_id'                  => 'integer|nullable',
         'project_id'               => 'integer|nullable',

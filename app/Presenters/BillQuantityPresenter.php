@@ -34,12 +34,21 @@ class BillQuantityPresenter extends Presenter
                 "formatter" => '',
             ],
             [
+                "field" => "brand",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/billquantities/table.brand'),
+                "visible" => true,
+                "formatter" => '',
+            ],
+
+            [
                 "field" => "modelNo",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/billquantities/table.modelNo.'),
                 "visible" => true,
-                "formatter" => 'billquantitiesLinkFormatter',
+                // "formatter" => 'billquantitiesLinkFormatter',
             ],
 
             [
@@ -55,7 +64,7 @@ class BillQuantityPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('admin/billquantities/table.type'),
+                "title" => trans('admin/billquantities/table.categories'),
                 "formatter" => "notesFormatter"
              ],
              [
@@ -63,7 +72,7 @@ class BillQuantityPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('admin/billquantities/table.option'),
+                "title" => trans('admin/billquantities/table.type'),
                 "formatter" => "notesFormatter"
              ],
              

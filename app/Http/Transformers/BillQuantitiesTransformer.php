@@ -28,18 +28,17 @@ class BillQuantitiesTransformer
 
                 'name'           => e($billquantity->name),
                 'serial'         => e($billquantity->serial),
-                'modelNo'         => e($billquantity->modelNo),
+                'modelNo'        => e($billquantity->modelNo),
                 'type'           => e($billquantity->type),
-                'option'           => e($billquantity->option),
-                'remark'           => e($billquantity->remark),
-                'brand'            => e($billquantity->brand),
+                'option'         => e($billquantity->option),
+                'remark'         => e($billquantity->remark),
+                'brand'          => e($billquantity->brand),
 
+                'sale_value'     =>  Helper::formatCurrencyOutput($billquantity->sale_value),
+                'buy_value'      =>  Helper::formatCurrencyOutput($billquantity->buy_value),
+                'net_profit'     =>  Helper::formatCurrencyOutput($billquantity->net_profit),
 
-                'sale_value'     => e($billquantity->sale_value),
-                'buy_value'      => e($billquantity->buy_value),
-                'net_profit'     => e($billquantity->net_profit),
-
-                'notes'             => ($billquantity->notes) ? e($billquantity->notes) : null,
+                'notes'          => ($billquantity->notes) ? e($billquantity->notes) : null,
                 'image'          => ($billquantity->image) ? Storage::disk('public')->url('billquantities/'.e($billquantity->image)) : null,
                 
                 'created_at' => Helper::getFormattedDateObject($billquantity->created_at, 'datetime'),
@@ -49,7 +48,7 @@ class BillQuantitiesTransformer
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', BillQuantity::class),
-                'delete' => (Gate::allows('delete', BillQuantity::class)),
+                'delete' => Gate::allows('delete', BillQuantity::class),
                 'view'   => Gate::allows('view',   BillQuantity::class),
 
             ];
