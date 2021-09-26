@@ -38,7 +38,7 @@ class LicensesTransformer
             'activation_date'    => Helper::getFormattedDateObject($license->activation_date, 'date'),
 
             'depreciation'       => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
-            'purchase_cost'      => e($license->purchase_cost),
+            'purchase_cost'      =>  Helper::formatCurrencyOutput($license->purchase_cost),
             'notes'              => e($license->notes),
             'expiration_date'    => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats'              => (int) $license->seats,
@@ -58,6 +58,8 @@ class LicensesTransformer
             'clone' => Gate::allows('create', License::class),
             'update' => Gate::allows('update', License::class),
             'delete' => Gate::allows('delete', License::class),
+            'view' => Gate::allows('view', License::class),
+
         ];
 
         $array += $permissions_array;

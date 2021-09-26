@@ -55,6 +55,8 @@ class ConsumablesTransformer
             'checkin' => Gate::allows('checkin', Consumable::class),
             'update' => Gate::allows('update', Consumable::class),
             'delete' => Gate::allows('delete', Consumable::class),
+            'view' => Gate::allows('view', Consumable::class),
+
         ];
         $array += $permissions_array;
         return $array;

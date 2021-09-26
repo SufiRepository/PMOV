@@ -30,6 +30,7 @@ class HelpdesksController extends Controller
                             'created_at',
                             'updated_at',
                             'deleted_at',
+                            'project_id',
                             'company_id',
                             'user_id',
                         ];
@@ -46,6 +47,10 @@ class HelpdesksController extends Controller
 
         if ($request->filled('search')) {
             $helpdesks = $helpdesks->TextSearch($request->input('search'));
+        }
+
+        if ($request->filled('project_id')) {
+            $helpdesks->where('project_id','=',$request->input('project_id'));
         }
 
 
