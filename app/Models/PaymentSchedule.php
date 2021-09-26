@@ -85,7 +85,7 @@ class PaymentSchedule extends SnipeModel
         'amount',
         'description',
         'task_name',
-        
+
         // 'purchaseorder_no',
         // 'file_purchaseorder_no',
         // 'invoice_no',
@@ -133,6 +133,11 @@ class PaymentSchedule extends SnipeModel
     {
         return $this->belongsTo('\App\Models\Project', 'project_id');
     }
+    public function contractor()
+    {
+        return $this->belongsTo('\App\Models\Contractor', 'contractor_id');
+    }
+
     public function task()
     {
         return $this->hasMany('\App\Models\Task', 'task_id');

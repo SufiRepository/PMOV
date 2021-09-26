@@ -45,14 +45,14 @@ class PaymentSchedulePresenter extends Presenter
                 "formatter" => "contractorsLinkObjFormatter"
             ], 
 
-            [
-                "field" => "paymentdate",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => true,
-                "title" => trans('Payment Date'),
-                'formatter' => "notesFormatter"
-            ],  
+            // [
+            //     "field" => "paymentdate",
+            //     "searchable" => true,
+            //     "sortable" => true,
+            //     "visible" => true,
+            //     "title" => trans('Payment Date'),
+            //     'formatter' => "notesFormatter"
+            // ],  
 
             [
                 "field" => "amount",

@@ -31,9 +31,12 @@ class BillingsController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', Billing::class);
+        // $this->authorize('view', Billing::class);
         $allowed_columns = [
             'id',
+            'task_name',
+            'amount',
+            'billingdate',
             'descriptions',
             'project_id',
             'task_id',
@@ -46,13 +49,13 @@ class BillingsController extends Controller
             $billings = $billings->TextSearch($request->input('search'));
         }
 
-        if ($request->filled('task_id')) {
-            $billings->where('task_id','=',$request->input('task_id'));
-        }
+        // if ($request->filled('task_id')) {
+        //     $billings->where('task_id','=',$request->input('task_id'));
+        // }
 
-        if ($request->filled('user_id')) {
-            $billings->where('user_id','=',$request->input('user_id'));
-        }
+        // if ($request->filled('user_id')) {
+        //     $billings->where('user_id','=',$request->input('user_id'));
+        // }
 
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
