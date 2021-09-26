@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TaskFile;
-// use App\Models\Task;
+use App\Models\File;
+use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -55,7 +57,8 @@ class TasksUploadController extends Controller
         $request->validate([
             'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
             ]);
-    
+            
+            $projectfiles = new File;
             $fileModel = new TaskFile;
     
             if($request->file()) {
@@ -68,10 +71,21 @@ class TasksUploadController extends Controller
                 $fileModel->name = $request->input('filename');
                 $fileModel->file_path = '/storage/' . $filePath;
                 $fileModel->save();
+
+                $fileName = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                $projectfilespath = $request->file('file')->storeAs('project_files', $fileName, 'public');
     
-                // return redirect()->route('taskuploads.index')
-                // ->with('success','File has been uploaded.')
-                // ->with('file', $fileName);
+                $projectfiles->filename = $request->input('filename').'.'.$request->file->getClientOriginalExtension();
+                $projectfiles->task_id = $request->input('task_id');
+                $projectfiles->notes = $request->input('notes');
+                $projectfiles->name = $request->input('filename');
+                $projectfiles->file_path = '/storage/' . $projectfilespath;
+
+
+                $task = Task::find($request->input('task_id'));
+                $projectfiles->file_location = $task->name;
+                $projectfiles->project_id = $task->project_id;
+                $projectfiles->save();
 
                 $taskId = $fileModel->task_id;
                 return redirect()->route('tasksreroute',['taskid'=>$taskId])->with('success', trans('admin/files/message.create.success'));
@@ -136,7 +150,7 @@ class TasksUploadController extends Controller
             return redirect()->route('projects.index')->with('error', trans('admin/clients/message.not_found'));
         }
 
-        $team->delete();
+        $taskfile->delete();
         return redirect()->route('projects.index')->with('success',
             trans('admin/clients/message.delete.success')
         );
