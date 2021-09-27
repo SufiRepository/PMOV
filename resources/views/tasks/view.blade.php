@@ -14,15 +14,20 @@
 <a href="{{ route('projectsreroute',['projectid'=> $task->project_id]) }}" class="btn btn-primary pull-right">
   {{ trans('general.back') }}</a>
 
+  @can('update', $task)
+  <a   type="button" class="btn btn-primary pull-right "  href="{{ route('tasks.edit', ['task' => $task->id]) }}">
+     <i class="fa fa-pencil-square" aria-hidden="true"></i>{{ trans('admin/tasks/general.edit') }}</a>
+   @endcan
 
-  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+
+  {{-- <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
     <span class="caret"></span>
   </button>
 
     <ul class="dropdown-menu" role="menu">
       <li role="menuitem"><a href="{{ route('tasks.edit', ['task' => $task->id]) }}">{{ trans('admin/tasks/general.edit') }}</a></li>
       <li role="menuitem">  <a   href="{{route('testsubtask', $task->id)}}">{{ trans('admin/subtasks/general.create_task') }}</a> </li>
-    </ul>
+    </ul> --}}
 
 @stop
 

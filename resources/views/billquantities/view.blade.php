@@ -2,7 +2,9 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/billquantities/table.view') }} -
+{{-- {{ trans('admin/billquantities/table.view') }}  --}}
+{{ trans('View bill of Material') }} 
+
 {{ $billquantity->name }}
 @parent
 @stop
@@ -146,7 +148,7 @@
            <div class="row">
              <div class="col-md-4">
                <strong>
-                {{ trans('admin/billquantities/form.buy_value') }}
+                {{ trans('Download ') }}
                </strong>
               </div>
                <div class="col-md-8">

@@ -4,7 +4,7 @@
 @section('title')
 
 {{-- {{ trans('admin/subtasks/general.view') }} --}}
-{{-- {{$subtask->name}} --}}
+{{$subtask->name}}
 
 
 @parent
@@ -16,7 +16,7 @@
   {{ trans('general.back') }}</a>
 
   <a href="{{ route('subtasks.edit', ['subtask' => $subtask->id]) }}" class="btn btn-primary pull-right">
-    {{ trans('admin/subtasks/general.edit') }} </a>
+    <i class="fa fa-pencil-square" aria-hidden="true"></i>{{ trans('admin/subtasks/general.edit') }} </a>
 
   {{-- <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
     <span class="caret"></span>

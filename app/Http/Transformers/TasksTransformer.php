@@ -68,9 +68,11 @@ class TasksTransformer
 
         $permissions_array['available_actions'] = [
             
-            'update' => Gate::allows('update', Task::class),
-            'delete' => Gate::allows('delete', Task::class),
-            'view'   => Gate::allows('view',   Task::class),
+            'update'  => Gate::allows('update', Task::class),
+            'delete'  => Gate::allows('delete', Task::class),
+            'view'    => Gate::allows('view',   Task::class),
+            // 'payment' => Gate::allows('payment',   Task::class),
+
 
 
         ];

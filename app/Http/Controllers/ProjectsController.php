@@ -228,7 +228,9 @@ class ProjectsController extends Controller
                     ->with(compact('taskcompleted'))
                     ->with(compact('taskdelayed'))
                     ->with(compact('tasktotal'))
-                    ->with(compact('$issuetotal'))
+                    ->with(compact('issuetotal'))
+
+                    // ->with(compact('$issuetotal'))
 
               ->with(['counts'=> $counts, 'role_id' => $role_id]) ;
             

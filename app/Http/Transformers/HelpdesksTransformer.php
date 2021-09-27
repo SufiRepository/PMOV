@@ -48,10 +48,15 @@ class HelpdesksTransformer
                 // 'deleted_at' => Helper::getFormattedDateObject($helpdesk->deleted_at, 'datetime'),
             ];
 
+            // $permissions_array['available_actions'] = [
+            //     'update' => (($helpdesk->deleted_at=='') && (Gate::allows('update', Helpdesk::class))),
+            //     'restore' => (($helpdesk->deleted_at!='') && (Gate::allows('create', Helpdesk::class))),
+            //     // 'delete' => $helpdesk->isDeletable(),
+            // ];
+
             $permissions_array['available_actions'] = [
-                'update' => (($helpdesk->deleted_at=='') && (Gate::allows('update', Helpdesk::class))),
-                'restore' => (($helpdesk->deleted_at!='') && (Gate::allows('create', Helpdesk::class))),
-                // 'delete' => $helpdesk->isDeletable(),
+                'update' => Gate::allows('update', Helpdesk::class),
+               
             ];
 
             $array += $permissions_array;

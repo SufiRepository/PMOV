@@ -47,7 +47,7 @@ class BillQuantitiesTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => Gate::allows('update', BillQuantity::class),
+                // 'update' => Gate::allows('update', BillQuantity::class),
                 'delete' => Gate::allows('delete', BillQuantity::class),
                 'view'   => Gate::allows('view',   BillQuantity::class),
 
