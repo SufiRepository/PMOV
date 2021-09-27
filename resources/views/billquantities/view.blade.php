@@ -124,7 +124,7 @@
                 </strong>
                </div>
                 <div class="col-md-8">
-                  {{ \App\Helpers\Helper::formatCurrencyOutput($billquantity->sale_value) }}
+                  RM {{ \App\Helpers\Helper::formatCurrencyOutput($billquantity->sale_value) }}
                 {{-- {!! nl2br(e($billquantity->sale_value)) !!} --}}
                 </div>
            </div>
@@ -138,7 +138,7 @@
                </strong>
               </div>
                <div class="col-md-8">
-                {{ \App\Helpers\Helper::formatCurrencyOutput($billquantity->buy_value) }}
+                RM {{ \App\Helpers\Helper::formatCurrencyOutput($billquantity->buy_value) }}
                {{-- {!! nl2br(e($billquantity->buy_value)) !!} --}}
                </div>
           </div>
