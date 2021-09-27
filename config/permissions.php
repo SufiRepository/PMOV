@@ -45,6 +45,170 @@ return array(
         ),
     ),
 
+    'Users' => array(
+        array(
+            'permission' => 'users.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'users.create',
+            'label'      => 'Create Users',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'users.edit',
+            'label'      => 'Edit Users',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'users.delete',
+            'label'      => 'Delete Users',
+            'note'       => '',
+            'display'    => true,
+        ),
+
+    ),
+
+    'Departments' => array(
+        array(
+            'permission' => 'departments.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Project' => array(
+        array(
+            'permission' => 'project.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'project.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'project.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'project.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Project Plan' => array(
+        array(
+            'permission' => 'implementationplans.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'implementationplans.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'implementationplans.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'implementationplans.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+
+    'Tasks' => array(
+        array(
+            'permission' => 'tasks.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'tasks.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'tasks.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'tasks.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+    'subtasks' => array(
+        array(
+            'permission' => 'subtasks.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'subtasks.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'subtasks.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'subtasks.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+
     'Assets' => array(
         array(
             'permission' => 'assets.view',
@@ -308,35 +472,6 @@ return array(
     ),
 
 
-    'Users' => array(
-        array(
-            'permission' => 'users.view',
-            'label'      => 'View ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'users.create',
-            'label'      => 'Create Users',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'users.edit',
-            'label'      => 'Edit Users',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'users.delete',
-            'label'      => 'Delete Users',
-            'note'       => '',
-            'display'    => true,
-        ),
-
-    ),
-
-
     'Models' => array(
         array(
             'permission' => 'models.view',
@@ -392,32 +527,7 @@ return array(
         ),
     ),
 
-    'Departments' => array(
-        array(
-            'permission' => 'departments.view',
-            'label'      => 'View ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'departments.create',
-            'label'      => 'Create ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'departments.edit',
-            'label'      => 'Edit  ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'departments.delete',
-            'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ),
-    ),
+    
 
     'Status Labels' => array(
         array(
@@ -474,7 +584,7 @@ return array(
     ), 
 
 //helpdesk dekat sini    
-    'helpdesks' => array(
+    'Helpdesks' => array(
         array(
             'permission' => 'helpdesks.view',
             'label'      => 'View ',
@@ -501,32 +611,7 @@ return array(
         ),
     ),
 //adding project
-    'Project' => array(
-        array(
-            'permission' => 'project.view',
-            'label'      => 'View ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'project.create',
-            'label'      => 'Create ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'project.edit',
-            'label'      => 'Edit  ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'project.delete',
-            'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ),
-    ),
+    
 
     'Team' => array(
         array(
@@ -555,86 +640,7 @@ return array(
         ),
     ),
 
-    'Implementationplans' => array(
-        array(
-            'permission' => 'implementationplans.view',
-            'label'      => 'View ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'implementationplans.create',
-            'label'      => 'Create ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'implementationplans.edit',
-            'label'      => 'Edit  ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'implementationplans.delete',
-            'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ),
-    ),
-
-
-    'Tasks' => array(
-        array(
-            'permission' => 'tasks.view',
-            'label'      => 'View ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'tasks.create',
-            'label'      => 'Create ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'tasks.edit',
-            'label'      => 'Edit  ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'tasks.delete',
-            'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ),
-    ),
-    'subtasks' => array(
-        array(
-            'permission' => 'subtasks.view',
-            'label'      => 'View ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'subtasks.create',
-            'label'      => 'Create ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'subtasks.edit',
-            'label'      => 'Edit  ',
-            'note'       => '',
-            'display'    => true,
-        ),
-        array(
-            'permission' => 'subtasks.delete',
-            'label'      => 'Delete ',
-            'note'       => '',
-            'display'    => true,
-        ),
-    ),
+    
 
     //end add project
     'Suppliers' => array(
@@ -760,7 +766,7 @@ return array(
 // new add 2/6/2021 
     // BillQuantity
 
-    'billquantities' => array(
+    'Bill of Material' => array(
         array(
             'permission' => 'billquantities.view',
             'label'      => 'View ',
@@ -844,7 +850,7 @@ return array(
         ),
     ),
 
-    'paymentschedules' => array(
+    'Payment Schedules' => array(
         array(
             'permission' => 'paymentschedules.view',
             'label'      => 'View ',
@@ -872,7 +878,7 @@ return array(
     ),
 
     //adding project upload
-    'projectuploads' => array(
+    'Project Uploads' => array(
         array(
             'permission' => 'projectuploads.view',
             'label'      => 'View ',
@@ -901,7 +907,7 @@ return array(
     //end add project
 
     //adding implementation upload
-    'implementationuploads' => array(
+    'Project Plan upload' => array(
         array(
             'permission' => 'implementationuploads.view',
             'label'      => 'View ',
@@ -930,7 +936,7 @@ return array(
     //end add implementation upload
 
     //adding tasks upload
-    'taskuploads' => array(
+    'Task Uploads' => array(
         array(
             'permission' => 'taskuploads.view',
             'label'      => 'View ',
@@ -959,7 +965,7 @@ return array(
     //end add tasks upload
 
     //adding subtask upload
-    'subtaskuploads' => array(
+    'Subtask Uploads' => array(
         array(
             'permission' => 'subtaskuploads.view',
             'label'      => 'View ',

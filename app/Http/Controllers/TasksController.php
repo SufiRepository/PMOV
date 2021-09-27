@@ -164,7 +164,8 @@ class TasksController extends Controller
             $task->supplier_id                  = $request->input('supplier_id');        
             $task->name                         = $request->input('name');
             $task->details                      = $request->input('details');
-            $task->amount_task                  = $request->input('value_task');    
+            
+            $task->amount_task                  =   Helper::ParseFloat($request->get('value_task'));    
             $task->payment_schedule_date        = $request->input('payment_month');        
             $task->billingOrpayment             = $request->input('billingOrpayment');   
             $task->contract_start_date          = $request->input('contract_start_date');
@@ -292,6 +293,7 @@ class TasksController extends Controller
         $task->supplier_id          = $request->input('supplier_id');        
         $task->name                 = $request->input('name');
         $task->details              = $request->input('details');
+        $task->amount_task                  =   Helper::ParseFloat($request->get('value_task'));    
         $task->contract_start_date  = $request->input('contract_start_date');
         $task->contract_end_date    = $request->input('contract_end_date');
         $task->actual_start_date    = $request->input('actual_start_date');
