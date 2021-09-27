@@ -368,9 +368,13 @@ class TasksController extends Controller
     public function show($id = null)
     {
         $task = Task::find($id);
+        
+        $userId = $task->team_member;
+        $user = User::find($userId);
+        // dd($user);
 
         if (isset($task->id)) {
-            return view('tasks/view', compact('task'));
+            return view('tasks/view', compact('task'),compact('user'));
         }
 
         return redirect()->route('tasks.index')->with('error', trans('admin/tasks/message.does_not_exist'));

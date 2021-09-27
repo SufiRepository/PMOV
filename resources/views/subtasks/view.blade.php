@@ -52,7 +52,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <strong>
-                     {{ trans('Name') }}
+                     {{ trans('general.name') }}
                     </strong>
                    </div>
                     <div class="col-md-8">
@@ -61,119 +61,15 @@
                </div>
                @endif
 
-              @if ($subtask->due_date)
+              @if ($subtask->amount_task)
                 <div class="row">
                   <div class="col-md-4">
                     <strong>
-                     {{ trans('Due Date') }}
+                     {{ trans('general.amount') }}
                     </strong>
                    </div>
                     <div class="col-md-8">
-                    {!! nl2br(e($subtask->due_date)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->start_date)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Start Date') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->start_date)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->finish_date)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Finish Date') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->finish_date)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->expected_costing)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Expected Costing') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->expected_costing)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->actual_costing)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Actual Costing') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->actual_costing)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->contract_start_date)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Contract Start Date') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->contract_start_date)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->contract_end_date)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Contract End Date ') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->contract_end_date)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->contract_duration)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Duration') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->contract_duration)) !!}
-                    </div>
-               </div>
-              @endif
-
-              @if ($subtask->payment_schedule_date)
-                <div class="row">
-                  <div class="col-md-4">
-                    <strong>
-                     {{ trans('Payment Schedule') }}
-                    </strong>
-                   </div>
-                    <div class="col-md-8">
-                    {!! nl2br(e($subtask->payment_schedule_date)) !!}
+                    RM {!! nl2br(e($subtask->amount_task)) !!}
                     </div>
                </div>
               @endif
@@ -182,7 +78,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <strong>
-                     {{ trans('Billing\Payment') }}
+                     {{ trans('general.billingpayment') }}
                     </strong>
                    </div>
                     <div class="col-md-8">
@@ -191,15 +87,158 @@
                </div>
               @endif
 
+              @if ($subtask->payment_schedule_date)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.billingschedule') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {!! nl2br(e($subtask->payment_schedule_date)) !!}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->contractor_id)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.contractor') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {!! nl2br(e($subtask->contractor->name)) !!}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->supplier_id)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.supplier') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {!! nl2br(e($subtask->supplier->name)) !!}
+                    </div>
+               </div>
+              @endif
+
               @if ($subtask->priority)
                 <div class="row">
                   <div class="col-md-4">
                     <strong>
-                     {{ trans('Priority') }}
+                     {{ trans('general.priority') }}
                     </strong>
                    </div>
                     <div class="col-md-8">
                     {!! nl2br(e($subtask->priority)) !!}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->statustask_id)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.status') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {!! nl2br(e($subtask->statustask_id)) !!}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->contract_start_date)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.start') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {{ \App\Helpers\Helper::getFormattedDateObject($subtask->contract_start_date, 'date', false) }}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->contract_end_date)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.end') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {{ \App\Helpers\Helper::getFormattedDateObject($subtask->contract_end_date, 'date', false) }}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->contract_duration)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.duration') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {!! nl2br(e($subtask->contract_duration)) !!} Days
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->actual_start_date)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.actual_start_date') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {{ \App\Helpers\Helper::getFormattedDateObject($subtask->actual_start_date, 'date', false) }}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->actual_end_date)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.actual_end_date') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {{ \App\Helpers\Helper::getFormattedDateObject($subtask->actual_end_date, 'date', false) }}
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->actual_duration)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.actual_duration') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {!! nl2br(e($subtask->actual_duration)) !!} Days
+                    </div>
+               </div>
+              @endif
+
+              @if ($subtask->details)
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                     {{ trans('general.details') }}
+                    </strong>
+                   </div>
+                    <div class="col-md-8">
+                    {!! nl2br(e($subtask->details)) !!}
                     </div>
                </div>
               @endif

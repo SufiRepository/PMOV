@@ -72,59 +72,287 @@
     
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#subtasks" data-toggle="tab">{{ trans('admin/subtasks/form.subtasks') }}</a></li>
+              <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
               <li><a href="#uploadedfile" data-toggle="tab">Upload Files</a></li>
+              <li class=""><a href="#subtasks" data-toggle="tab">{{ trans('admin/subtasks/form.subtasks') }}</a></li>
               {{-- <li><a href="#billings" data-toggle="tab">billings</a></li> --}}
-          
             </ul>
           
             <div class="tab-content">
           
-              <div class="tab-pane active" id="subtasks">
+              <div class="tab-pane active" id="details">
                 <div class="row">
                   <div class="col-md-12">
-               
-                      <div class="box-header with-border">
-                        <div class="box-heading">
-                          <h2 class="box-title"> {{ trans('List of Subtask') }}</h2>
+                    <div class="container row-striped">
+
+                      @if ($task->name)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.name') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->name)) !!}
+                          </div>
                         </div>
-                      </div><!-- /.box-header -->    
-                       <div class="box">
+                      @endif
+
+                      @if ($task->milestone)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.milestones') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->milestone)) !!}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->amount_task)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.amount') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            RM {!! nl2br(e($task->amount_task)) !!}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->billingOrpayment)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.billingpayment') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->billingOrpayment)) !!}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->payment_schedule_date)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.billingschedule') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->payment_schedule_date)) !!}
+                            {{-- {{ \App\Helpers\Helper::getFormattedDateObject($task->payment_schedule_date, 'date', false) }} --}}
+                            
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->contractor_id)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.contractor') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->contractor->name)) !!}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->supplier_id)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.supplier') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->supplier->name)) !!}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->team_member)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.team_member') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($user->first_name)) !!}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->priority)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.priority') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->priority)) !!}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->statustask_id)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.status') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->statustask_id)) !!}
+                          </div>
+                        </div>
+                      @endif
+                      
+                      @if ($task->contract_start_date)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.start') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {{-- {!! nl2br(e($task->contract_start_date)) !!} --}}
+                            {{ \App\Helpers\Helper::getFormattedDateObject($task->contract_start_date, 'date', false) }}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->contract_end_date)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.end') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {{-- {!! nl2br(e($task->contract_end_date)) !!} --}}
+                            {{ \App\Helpers\Helper::getFormattedDateObject($task->contract_end_date, 'date', false) }}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->contract_duration)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.duration') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->contract_duration)) !!} Days
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->actual_start_date)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.actual_start_date') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {{-- {!! nl2br(e($task->actual_start_date)) !!} --}}
+                            {{ \App\Helpers\Helper::getFormattedDateObject($task->actual_start_date, 'date', false) }}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->actual_end_date)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.actual_end_date') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {{ \App\Helpers\Helper::getFormattedDateObject($task->actual_end_date, 'date', false) }}
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->actual_duration)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.actual_duration') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->actual_duration)) !!} Days
+                          </div>
+                        </div>
+                      @endif
+
+                      @if ($task->details)
+                        <div class="row">
+                          <div class="col-md-4">
+                            <strong>
+                              {{ trans('general.details') }}
+                            </strong>
+                          </div>
+                          <div class="col-md-8">
+                            {!! nl2br(e($task->details)) !!}
+                          </div>
+                        </div>
+                      @endif
+                  </div>
+                </div>
+          
+                </div> <!--/.row-->
+              </div> <!-- /.tab-pane -->
+              <div class="tab-pane" id="subtasks">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="box-header with-border">
+                      <div class="box-heading">
+                        <h2 class="box-title"> {{ trans('List of Subtask') }}</h2>
+                      </div>
+                    </div><!-- /.box-header -->    
+                    <div class="box">
                       <div class="box-body">
-                
+        
                         <table
-                        data-columns="{{ \App\Presenters\SubtaskPresenter::dataTableLayout() }}"
-                        data-cookie-id-table="subtaskTable"
-                        data-pagination="true"
-                        data-search="true"
-                        data-side-pagination="server"
-                        data-show-columns="true"
-                        data-show-export="true"
-                        data-show-footer="true"
-                        data-show-refresh="true"
-                        data-sort-order="asc"
-                        data-sort-name="name"
-                        id="subtaskTable"
-                        class="table table-striped snipe-table"
-                        data-url="{{ route('api.subtasks.index',['task_id' => $task->id]) }}"
-                        data-export-options='{
-                      "fileName": "export-projects-{{ date('Y-m-d') }}",
-                      "ignoreColumn": ["actions","image","change","icon"]
-                      }'>
-                       </table>
-                
+                          data-columns="{{ \App\Presenters\SubtaskPresenter::dataTableLayout() }}"
+                          data-cookie-id-table="subtaskTable"
+                          data-pagination="true"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-footer="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          data-sort-name="name"
+                          id="subtaskTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{ route('api.subtasks.index',['task_id' => $task->id]) }}"
+                          data-export-options='{
+                          "fileName": "export-projects-{{ date('Y-m-d') }}",
+                          "ignoreColumn": ["actions","image","change","icon"]}'>
+                        </table>
                       </div><!-- /.box-body -->
-                
                       <div class="box-footer clearfix">
                       </div>
                     </div><!-- /.box -->
                   </div>
-          
-                </div> <!--/.row-->
-              </div> <!-- /.tab-pane -->
-          
-          
-          
+                </div>
+              </div>
+        
               <div class="tab-pane" id="uploadedfile">
                 <div class="row">
                   <div class="col-md-12">
