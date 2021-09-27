@@ -115,8 +115,8 @@
       <div class="small-box bg-black">
         <div class="inner">
           {{-- <h3> {{ number_format($counts['total_task']) }}</h3> --}}
-          <h3> 0 </h3>
-          {{-- <h3>{{$issuetotal}}</h3> --}}
+          {{-- <h3> 0 </h3> --}}
+          <h3>{{$issuetotal}}</h3>
 
             <p>{{ trans('admin/projects/general.issue') }}</p>
         </div>

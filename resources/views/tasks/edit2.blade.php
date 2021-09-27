@@ -16,7 +16,19 @@
  {{-- @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id']) --}}
  
 
+
  @include ('partials.forms.edit.name', ['translated_name' => trans('Tasks')])
+
+ @include ('partials.forms.edit.value3')
+  
+<div class="form-group col-xs-12 col-sm-12 col-md-12">
+    <label for="costing" class="col-md-3 control-label">Billing Schedule:</label>
+        <div class="col-md-9">
+            <div class="input-group col-md-7 col-sm-12" style="padding-left: 0px;">
+                <input type="month" id="bdaymonth" name="payment_month">
+            </div>
+        </div>
+</div>
 
  @include ('partials.forms.edit.contractor-select', ['translated_name' => trans('general.contractors'), 'fieldname' => 'contractor_id'])
  @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])

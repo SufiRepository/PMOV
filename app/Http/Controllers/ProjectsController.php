@@ -413,8 +413,6 @@ class ProjectsController extends Controller
             ->count();
 
             $issuetotal = DB::table('helpdesks')->where('project_id',$projectId)
-            // ->where('statustask_id','=','Delayed') 
-            ->where('deleted_at','=',null) 
             ->count();
 
             // return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
@@ -427,7 +425,9 @@ class ProjectsController extends Controller
             ->with(compact('taskcompleted'))
             ->with(compact('taskdelayed'))
             ->with(compact('tasktotal'))
-            ->with(compact('$issuetotal'))
+            ->with(compact('issuetotal'))
+
+            // ->with(compact('$issuetotal'))
 
 
 
