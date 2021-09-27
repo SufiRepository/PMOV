@@ -219,31 +219,6 @@
                 </div><!-- /.box-header -->   
                    <div class="box">
                 <div class="box-body">
-{{-- 
-                  <table
-                  data-click-to-select="true"
-                  data-columns="{{ \App\Presenters\TaskPresenter::dataTableLayout() }}"
-                  data-cookie-id-table="usersTable"
-                  data-pagination="true"
-                  data-id-table="usersTable"
-                  data-search="true"
-                  data-side-pagination="server"
-                  data-show-columns="true"
-                  data-show-export="true"
-                  data-show-refresh="true"
-                  data-sort-order="asc"
-                  data-toolbar="#toolbar"
-                  id="usersTable"
-                  class="table table-striped snipe-table"
-                  data-url="{{ route('api.users.index',
-            array('deleted'=> (request('status')=='deleted') ? 'true' : 'false','company_id' => e(request('company_id')))) }}"
-                  data-export-options='{
-              "fileName": "export-users-{{ date('Y-m-d') }}",
-              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-              }'>
-                  </table>
-                   --}}
-
                   <table
                   data-columns="{{ \App\Presenters\TaskPresenter::dataTableLayout() }}"
                   data-cookie-id-table="TaskTable"
@@ -670,6 +645,7 @@
                   id="helpdeskTable"
                   class="table table-striped snipe-table"
                   data-url="{{ route('api.helpdesks.index',['project_id' => $project->id]) }}"
+                  {{-- data-url="{{ route('api.helpdesks.index',['project_id' => $project->id]) }}" --}}
                   data-export-options='{
                 "fileName": "export-projects-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","icon"]
