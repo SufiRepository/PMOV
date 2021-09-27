@@ -28,6 +28,7 @@
     <label for="files" class="col-md-3 control-label">Select Files</label>
     <div class="col-md-7 col-sm-12">
         <input type="file" name="file" class="custom-file-input" id="chooseFile">
+        <p >only csv,txt,xlx,xls,pdf type file, and 5Mb</p>
     </div>
     
 </div>

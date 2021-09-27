@@ -35,7 +35,7 @@ class FilesTransformer
 
         $permissions_array['available_actions'] = [
             
-            'update' => Gate::allows('update', File::class),
+            // 'update' => Gate::allows('update', File::class),
             'delete' => Gate::allows('delete', File::class),
         ];
         $array += $permissions_array;

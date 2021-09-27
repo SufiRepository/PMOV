@@ -90,7 +90,7 @@ class ProjectUploadController extends Controller
     /**
      * assignwork update.
      *
-     * @param  int $assignworkId
+     * @param  int $fileId
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -110,7 +110,7 @@ class ProjectUploadController extends Controller
     /**
      * assignwork update form processing page.
      *
-     * @param  int $assignrworkId
+     * @param  int $fileId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -134,13 +134,13 @@ class ProjectUploadController extends Controller
     /**
      * Delete the given assignwork.
      *
-     * @param  int $assignworkId
+     * @param  int $fileId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($fileId)
     {
-    //    $this->authorize('delete', File::class);
+       $this->authorize('delete', File::class);
         if (is_null($file = File::find($fileId))) {
             return redirect()->route('projects.index')->with('error', trans('admin/clients/message.not_found'));
         }
@@ -150,16 +150,13 @@ class ProjectUploadController extends Controller
             trans('admin/clients/message.delete.success')
         );
 
-        $projectId = $fileModel->project_id;
-        
-        return redirect()->route('projectsreroute', ['projectid' => $projectId]) ->with('success','File has been uploaded.');
     }
 
 
     /**
      *  Get the asset information to present to the assignwork view page
      *
-     * @param null $assignworkId
+     * @param null $fileId
      * @return \Illuminate\Contracts\View\View
      * @internal param int $assetId
      */
