@@ -230,7 +230,7 @@
     'email'                 => 'Email',
     'phone'                 => 'Phone',
     'new_upload_file'      => 'New Upload File',
-    'noimplementationplan' =>'Your Project Does Not Have Implementation Plan',
+    'noimplementationplan' =>'Your Project Does Not Have Project Plan',
     'profile'				=> 'Your profile',
     'upload_file'           => 'Upload File',
     'purchase_cost'         => 'Purchase Cost',

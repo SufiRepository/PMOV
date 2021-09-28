@@ -205,6 +205,8 @@ Update Issue
                         <div class="form-group">
                           <label for="name" class="col-md-3 control-label">Solution</label>
                           <div class="col-md-7 col-sm-12">
+                            <textarea class="col-md-6 form-control" id="solution" aria-label="solution" name="solution"></textarea>
+
                               <input class="form-control" type="text" name="solution" aria-label="solution" id="solution" value="" />
                           </div>
                         </div>
