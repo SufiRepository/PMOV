@@ -260,7 +260,7 @@ class SubtasksController extends Controller
     public function show($id = null)
     {
         $subtask = Subtask::find($id);
-
+        // dd($subtask);
         if (isset($subtask->id)) {
             return view('subtasks/view', compact('subtask'));
         }
